@@ -15,6 +15,7 @@ load File.expand_path('../../../dkdeploy/tasks/db.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/enhanced_symlinks.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/current_folder.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/bower.rake', __FILE__)
+load File.expand_path('../../../dkdeploy/tasks/mysql.rake', __FILE__)
 
 # Hook into symlink related tasks
 after 'deploy:check:linked_dirs', 'deploy:enhanced_symlinks:check:linked_dirs'
@@ -84,5 +85,8 @@ namespace :load do
 
     # Airbrush configuration
     set :format_options, command_output: true, log_file: nil, truncate: false
+
+    # MySQL slow_log
+    set :mysql_slow_log, ''
   end
 end

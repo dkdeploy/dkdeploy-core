@@ -1,5 +1,5 @@
 set :deploy_to, '/var/www/dkdeploy'
-server 'dkdeploy-core.dev', roles: %w(web app backend), primary: true
+server 'dkdeploy-core.dev', roles: %w(web app backend db), primary: true
 
 # no ssh compression on the dev stage
 set :ssh_options, {
@@ -33,3 +33,6 @@ set :default_file_access_owner_of_release_path, 'vagrant'
 
 set :default_file_access_group_of_shared_path, 'vagrant'
 set :default_file_access_group_of_release_path, 'vagrant'
+
+# mysql slow query log for performance analysis
+set :mysql_slow_log, '/var/log/mysql-default/slow-queries.log'
