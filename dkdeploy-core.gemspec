@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = %w(lars.tode@dkd.de timo.webler@dkd.de kieran.hayes@dkd.de nicolai.reuschling@dkd.de johannes.goslar@dkd.de luka.luedicke@dkd.de)
   spec.description   = 'dkd basic deployment tasks and strategies'
   spec.summary       = 'dkd basic deployment tasks and strategies'
-  spec.homepage      = 'https://redmine.dkd.de/projects/dkdeploy/wiki'
+  spec.homepage      = 'https://github.com/dkdeploy/dkdeploy-core'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin\/}) { |f| File.basename(f) }
