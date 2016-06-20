@@ -1,0 +1,11 @@
+# Load DSL and Setup Up Stages
+require 'capistrano/setup'
+
+# Includes default deployment tasks
+require 'capistrano/deploy'
+
+# Include dkdeploy gem
+require 'dkdeploy'
+
+# Includes dkdeploy deployment tasks
+require 'capistrano/dkdeploy/core'

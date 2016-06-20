@@ -1,0 +1,12 @@
+<FilesMatch "index.php">
+Allow from all
+</FilesMatch>
+<%=
+	current_stage = fetch(:stage).to_s
+	current_stage_htaccess_file_configuration_path = current_stage + '.htaccess.erb'
+	sub_template_file_path = File.expand_path File.join(apache_configuration_path, current_stage_htaccess_file_configuration_path)
+	if File.exists? sub_template_file_path
+		sub_template = ERB.new File.read(sub_template_file_path)
+		sub_template.result
+	end
+%>
