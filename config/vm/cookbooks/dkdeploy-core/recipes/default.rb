@@ -50,7 +50,7 @@ end
 
 directory '/var/www' do
   owner 'vagrant'
-  owner 'vagrant'
+  group 'vagrant'
   mode '0770'
   action :create
 end
