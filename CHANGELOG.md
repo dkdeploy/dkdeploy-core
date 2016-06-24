@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - set group permissions for /var/www in Chef cookbook (Vagrant)
 - set proper gem homepage
+- add travis support
 
 ## [8.0.0] - 2016-06-20
 ### Summary

@@ -4,6 +4,7 @@ AllCops:
     - 'spec/fixtures/application/htdocs/stylesheets/**/config.rb'
     - 'config/**/*'
     - 'Vagrantfile'
+    - 'vendor/**/*'
 GlobalVars:
   AllowedVariables: []
 MethodLength:
