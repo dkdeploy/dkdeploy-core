@@ -1,5 +1,6 @@
 # Dkdeploy::Core
 
+[![Build Status](https://api.travis-ci.org/dkdeploy/dkdeploy-core.svg?branch=develop)](https://travis-ci.org/repositories/dkdeploy/dkdeploy-core)
 [![Gem Version](https://badge.fury.io/rb/dkdeploy-core.svg)](https://badge.fury.io/rb/dkdeploy-core) [![Inline docs](http://inch-ci.org/github/dkdeploy/dkdeploy-core.svg?branch=develop)](http://inch-ci.org/github/dkdeploy/dkdeploy-core)
 
 ## Description
