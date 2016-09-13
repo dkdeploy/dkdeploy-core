@@ -105,10 +105,10 @@ module Dkdeploy
           execute :rm, '-rf', me.local_tmp_dir
         end
 
-        # removes the remote archive
+        # removes the remote temp path including the uploaded archive
         on release_roles :app do
           info I18n.t('file.remove', path: me.remote_archive_path, scope: :dkdeploy)
-          execute :rm, '-f', me.remote_archive_path
+          execute :rm, '-rf', me.remote_tmp_dir
         end
       end
 
