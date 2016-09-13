@@ -6,7 +6,7 @@ rvm:
   - 2.2
 
 before_install:
-  - gem install bundler --version 1.12.5 --no-document
+  - gem install bundler --version 1.13.0 --no-document
 
 script:
   - bundle exec rubocop
