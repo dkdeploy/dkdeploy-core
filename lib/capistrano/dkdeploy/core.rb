@@ -16,6 +16,7 @@ load File.expand_path('../../../dkdeploy/tasks/enhanced_symlinks.rake', __FILE__
 load File.expand_path('../../../dkdeploy/tasks/current_folder.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/bower.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/mysql.rake', __FILE__)
+load File.expand_path('../../../dkdeploy/tasks/temp_folder.rake', __FILE__)
 
 # Hook into symlink related tasks
 after 'deploy:check:linked_dirs', 'deploy:enhanced_symlinks:check:linked_dirs'

@@ -138,4 +138,9 @@ namespace :utils do
       end
     end
   end
+
+  desc 'Create local temporary directory'
+  task :create_local_temp_directory do
+    run_locally { FileUtils.mkdir_p local_dump_path }
+  end
 end
