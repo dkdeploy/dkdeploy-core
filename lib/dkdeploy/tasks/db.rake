@@ -11,8 +11,7 @@ include Dkdeploy::Helpers::DB
 include Capistrano::DSL
 
 namespace :db do
-  task :read_db_settings do
-    FileUtils.mkdir_p 'temp'
+  task read_db_settings: 'utils:create_local_temp_directory' do
     on release_roles :app do
       unless test("[ -f #{remote_database_config_path} ]")
         error I18n.t('errors.database_config_file_missing', scope: :dkdeploy)
@@ -105,9 +104,7 @@ namespace :db do
   task download: [:download_structure, :download_content]
 
   desc 'Dumps complete database structure without content'
-  task :download_structure do
-    FileUtils.mkdir_p 'temp'
-
+  task download_structure: 'utils:create_local_temp_directory' do
     dump_file = db_dump_file_structure
     remote_dump_file = File.join(fetch(:deploy_to), dump_file)
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
@@ -135,9 +132,7 @@ namespace :db do
   end
 
   desc 'Dump complete database content without cache tables and structure to local temp folder'
-  task :download_content do
-    FileUtils.mkdir_p 'temp'
-
+  task download_content: 'utils:create_local_temp_directory' do
     dump_file = db_dump_file_content
     remote_dump_file = File.join(fetch(:deploy_to), dump_file)
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
@@ -170,10 +165,8 @@ namespace :db do
   end
 
   desc 'Dump content of a database table to local temp folder'
-  task :dump_table, :table_name do |_, args|
+  task :dump_table, [:table_name] => ['utils:create_local_temp_directory'] do |_, args|
     table_name = ask_variable(args, :table_name, 'questions.database.table_name')
-
-    FileUtils.mkdir_p 'temp'
 
     dump_file = db_dump_file table_name
     zipped_dump_file = File.join('temp', "#{dump_file}.gz")

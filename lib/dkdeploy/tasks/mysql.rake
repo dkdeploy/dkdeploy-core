@@ -19,19 +19,18 @@ namespace :mysql do
   end
 
   desc 'Download slow log file to temp/'
-  task :download_slow_log do
+  task download_slow_log: 'utils:create_local_temp_directory' do
     mysql_slow_log = fetch(:mysql_slow_log, '')
     on roles :db do |server|
       next unless slow_log_exists? mysql_slow_log
       local_filename = File.join(local_dump_path, "#{File.basename(mysql_slow_log, '.*')}.#{fetch(:stage)}.#{server.hostname}#{File.extname(mysql_slow_log)}")
       info I18n.t('file.download', file: mysql_slow_log, target: local_filename, host: server)
-      execute :mkdir, '-p', local_dump_path
       download! mysql_slow_log, local_filename, via: :scp
     end
   end
 
   desc 'Download slow log file to temp'
-  task :analyze_download_slow_log do
+  task analyze_download_slow_log: 'utils:create_local_temp_directory' do
     mysql_slow_log = fetch(:mysql_slow_log, '')
     on roles :db do |server|
       next unless slow_log_exists? mysql_slow_log
@@ -42,7 +41,6 @@ namespace :mysql do
       execute :rm, '-f', remote_filename
       info I18n.t('tasks.mysql.analyze_slow_log', host: server, scope: :dkdeploy)
       execute :mysqldumpslow, '-s', 't', mysql_slow_log, '>', remote_filename
-      execute :mkdir, '-p', local_dump_path
       info I18n.t('file.download', file: remote_filename, target: local_filename, host: server)
       download! remote_filename, local_filename, via: :scp
       # delete file, if exist
