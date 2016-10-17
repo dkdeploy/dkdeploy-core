@@ -17,3 +17,5 @@ BracesAroundHashParameters:
   Enabled: false
 CyclomaticComplexity:
   Max: 10
+Metrics/BlockLength:
+  Enabled: false
