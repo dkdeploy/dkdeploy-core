@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 11.2'
   spec.add_development_dependency 'rspec', '~> 3.4'
   spec.add_development_dependency 'cucumber', '~> 2.4'
-  spec.add_development_dependency 'rubocop', '~> 0.40'
+  spec.add_development_dependency 'rubocop', '0.46'
   spec.add_development_dependency 'aruba', '~> 0.14.1'
   spec.add_development_dependency 'mysql2', '~> 0.3'
   spec.add_development_dependency 'pry', '~> 0.10.3'
