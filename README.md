@@ -64,7 +64,7 @@ The complete list of the dkdeploy constants you find in `/lib/capistrano/dkdeplo
 
 ### Prerequisite
 
-rvm (v1.25.x) with installed Ruby 2.1.
+rvm (v1.25.x) with installed Ruby 2.3.
 
 Add the virtual box alias to your `hosts` file
 

@@ -2,11 +2,13 @@ sudo: false
 language: ruby
 cache: bundler
 rvm:
-  - 2.1
-  - 2.2
+  - 2.1.9
+  - 2.1.10
+  - 2.2.6
+  - 2.3.3
 
 before_install:
   - gem install bundler --version 1.12.5 --no-document
 
 script:
-  - bundle exec rubocop
+  - bundle _1.12.5_ exec rubocop
