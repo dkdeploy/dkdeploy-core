@@ -3,7 +3,6 @@ require 'dkdeploy/i18n'
 require 'dkdeploy/helpers/file_system'
 
 include Capistrano::DSL
-include SSHKit::DSL
 include Dkdeploy::Helpers::FileSystem
 
 namespace :file_access do

@@ -1,5 +1,4 @@
 include Capistrano::DSL
-include SSHKit::DSL
 
 module Dkdeploy
   module Helpers

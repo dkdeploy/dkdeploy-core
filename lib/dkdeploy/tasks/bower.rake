@@ -2,7 +2,6 @@ require 'capistrano/i18n'
 require 'dkdeploy/i18n'
 
 include Capistrano::DSL
-include SSHKit::DSL
 
 namespace :bower do
   desc 'Runs given Bower command in given path'
