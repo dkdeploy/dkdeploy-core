@@ -30,6 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'dkdeploy-test_environment', '~> 1.0'
 
   spec.add_dependency 'capistrano', '~> 3.5.0'
-  spec.add_dependency 'sshkit', '= 1.10.0'
   spec.add_dependency 'highline', '~> 1.7.1'
 end
