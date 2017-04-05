@@ -2,6 +2,10 @@ include Capistrano::DSL
 
 require 'dkdeploy/rollback_manager'
 
+# Install copy plugin
+require 'dkdeploy/scm/copy'
+install_plugin Dkdeploy::SCM::Copy
+
 # Load dkdeploy tasks
 load File.expand_path('../../../dkdeploy/tasks/deploy.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/fail.rake', __FILE__)
@@ -26,25 +30,6 @@ after 'deploy:symlink:linked_files', 'deploy:enhanced_symlinks:symlink:linked_fi
 
 namespace :load do
   task :defaults do
-    # Set scm to new scm "copy"
-    set :scm, :copy
-
-    # Set default values for copy scm
-    set :copy_source, 'htdocs'
-    set :copy_exclude, Array[
-      'vendor/bundle/**',
-      'Gemfile*',
-      '**/.git',
-      '**/.svn',
-      '**/.DS_Store',
-      '.settings',
-      '.project',
-      '.buildpath',
-      'Capfile',
-      'Thumbs.db',
-      'composer.lock'
-    ]
-
     # Set default web root paths
     set(:local_web_root_path, -> { fetch(:copy_source) })
     set :remote_web_root_path, '.'

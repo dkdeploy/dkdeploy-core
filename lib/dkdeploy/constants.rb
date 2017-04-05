@@ -100,57 +100,5 @@ module Dkdeploy
     def ignore_tables
       default_ignore_tables | additional_ignore_tables
     end
-
-    #####################################################
-    # Local temporary directory constants
-    #####################################################
-
-    # Archive filename as singleton
-    # Note: if the archive filename doesn't already exist it will be generated
-    #
-    # @return [String]
-    def archive_filename
-      @archive_filename ||= Dir::Tmpname.make_tmpname [application + '_', '.tar.gz'], nil
-    end
-
-    # Local temporary directory path as singleton
-    # Note: if the directory doesn't already exist it will be created
-    #
-    # @return [String]
-    def local_tmp_dir
-      @local_tmp_dir ||= Dir.mktmpdir
-    end
-
-    # Archive path in a local temporary directory
-    #
-    # @return [String]
-    def local_exclude_path
-      File.join local_tmp_dir, 'exclude.txt'
-    end
-
-    # Archive path in a local temporary directory
-    #
-    # @return [String]
-    def local_archive_path
-      File.join local_tmp_dir, archive_filename
-    end
-
-    #####################################################
-    # remote paths constants
-    #####################################################
-
-    # Remote temporary directory path
-    #
-    # @return [String]
-    def remote_tmp_dir
-      File.join fetch(:tmp_dir), application
-    end
-
-    # Archive path in a remote temporary directory
-    #
-    # @return [String]
-    def remote_archive_path
-      File.join remote_tmp_dir, archive_filename
-    end
   end
 end
