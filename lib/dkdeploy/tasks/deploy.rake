@@ -5,16 +5,6 @@ include Dkdeploy::DSL
 include Dkdeploy::RollbackManager
 
 namespace :deploy do
-  desc 'Generate the new release path name'
-  task :new_release_path do
-    jenkins_suffix = ''
-    # Add jenkins build name and number to release path
-    if ENV['BUILD_TAG']
-      jenkins_suffix = "-#{ENV['JOB_NAME']}-#{ENV['BUILD_NUMBER']}"
-    end
-    set_release_path releases_path.join(Time.now.utc.strftime('%Y-%m-%d-%H-%M-%S') + jenkins_suffix)
-  end
-
   desc 'Handle deployment errors'
   task :failed do
     # Rollback tasks. Reverse sorting for rollback
