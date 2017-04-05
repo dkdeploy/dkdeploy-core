@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support for dkdeploy-test_environment v2.0.0
 - Vagrant 2.0.x support
 - rubocop upgrade to 0.50
+- update capistrano to 3.8.0
+- remove jenkins release suffix
 
 ### Fixed
 - set group permissions for /var/www in Chef cookbook (Vagrant)
@@ -16,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - add travis support
 - improved code syntax according to RuboCop
 - install `mysql` instead of `mysql-connector-c`
+- remove sshkit dsl includes
 
 ## [8.0.0] - 2016-06-20
 ### Summary
