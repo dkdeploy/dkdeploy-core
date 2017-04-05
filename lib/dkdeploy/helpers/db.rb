@@ -42,7 +42,7 @@ module Dkdeploy
           return
         end
         json_string = context.download! remote_database_config_path
-        YAML.load(json_string).fetch('database')
+        YAML.safe_load(json_string).fetch('database')
       end
     end
   end

@@ -66,7 +66,7 @@ module Dkdeploy
     #
     # @return [String]
     def default_ignore_tables
-      %w(
+      %w[
         cache_extensions cache_hash cache_imagesizes cache_md5params
         cache_pages cache_pagesection cache_sys_dmail_stat cache_treelist cache_typo3temp_log
         cachingframework_cache_hash cachingframework_cache_hash_tags cachingframework_cache_pages
@@ -82,7 +82,7 @@ module Dkdeploy
         cf_extbase_reflection cf_extbase_reflection_tags cf_extbase_typo3dbbackend_queries
         cf_extbase_typo3dbbackend_queries_tags cf_extbase_typo3dbbackend_tablecolumns
         cf_extbase_typo3dbbackend_tablecolumns_tags
-      )
+      ]
     end
 
     # List of table names to be ignored when dumping from database defined via Capistrano variable or environment variable

@@ -1,5 +1,5 @@
 set :deploy_to, '/var/www/dkdeploy'
-server 'dkdeploy-core.dev', roles: %w(web app backend db), primary: true
+server 'dkdeploy-core.dev', roles: %w[web app backend db], primary: true
 
 # no ssh compression on the dev stage
 set :ssh_options, {
@@ -18,11 +18,11 @@ unless ssh_key_files.empty?
 end
 
 set :copy_source, 'htdocs'
-set :copy_exclude, %w(
+set :copy_exclude, %w[
   Gemfile*
   .hidden
   **/.hidden
-)
+]
 
 # version file path
 set :version_file_path, ''

@@ -101,7 +101,7 @@ namespace :db do
   end
 
   desc 'Dump complete database without cache table content to local temp folder'
-  task download: [:download_structure, :download_content]
+  task download: %i[download_structure download_content]
 
   desc 'Dumps complete database structure without content'
   task download_structure: 'utils:create_local_temp_directory' do
