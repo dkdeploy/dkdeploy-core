@@ -77,7 +77,7 @@ module Dkdeploy
       def copy_archive_to_server # rubocop:disable Metrics/AbcSize
         # scope object for the processing in the block
         me = self
-        on release_roles :app do
+        @context.on release_roles :app do
           info I18n.t('file.upload', file: 'archive', target: me.remote_tmp_dir, scope: :dkdeploy)
           execute :mkdir, '-p', me.remote_tmp_dir
 
@@ -106,7 +106,7 @@ module Dkdeploy
         end
 
         # removes the remote temp path including the uploaded archive
-        on release_roles :app do
+        @context.on release_roles :app do
           info I18n.t('file.remove', path: me.remote_archive_path, scope: :dkdeploy)
           execute :rm, '-rf', me.remote_tmp_dir
         end
