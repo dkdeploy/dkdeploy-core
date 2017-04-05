@@ -46,7 +46,7 @@ namespace :load do
     ]
 
     # Set default web root paths
-    set :local_web_root_path, -> { fetch(:copy_source) }
+    set(:local_web_root_path, -> { fetch(:copy_source) })
     set :remote_web_root_path, '.'
 
     # Set default version file path
@@ -72,8 +72,8 @@ namespace :load do
     set :keep_rollback_archives, 5
 
     # List of bower.json files
-    set :bower_path, -> { fetch(:copy_source) }
-    set :bower_paths, -> { Array(fetch(:copy_source)) }
+    set(:bower_path, -> { fetch(:copy_source) })
+    set(:bower_paths, -> { Array(fetch(:copy_source)) })
 
     # List of filters for file_access:set_selected_custom_access
     set :selected_custom_file_access, []

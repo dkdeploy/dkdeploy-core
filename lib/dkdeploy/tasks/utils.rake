@@ -88,7 +88,7 @@ namespace :utils do
     # Append '/' to source directory
     rsync_path = File.join(rsync_path, '')
 
-    rsync_command = %w(--verbose --recursive --perms --times --perms --perms --compress --force --cvs-exclude)
+    rsync_command = %w[--verbose --recursive --perms --times --perms --perms --compress --force --cvs-exclude]
 
     # Build exclude parameter
     rsync_exclude.each do |exclude|

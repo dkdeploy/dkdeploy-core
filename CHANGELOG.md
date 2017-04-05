@@ -6,11 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - tasks around MySQL slow log
 - add `utils:create_local_temp_directory` task
+- support for dkdeploy-test_environment v2.0.0
 
 ### Fixed
 - set group permissions for /var/www in Chef cookbook (Vagrant)
 - set proper gem homepage
 - add travis support
+- improved code syntax according to RuboCop
 
 ## [8.0.0] - 2016-06-20
 ### Summary
