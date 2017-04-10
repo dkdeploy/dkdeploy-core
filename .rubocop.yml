@@ -5,6 +5,7 @@ AllCops:
     - 'config/**/*'
     - 'Vagrantfile'
     - 'vendor/**/*'
+  TargetRubyVersion: 2.2
 GlobalVars:
   AllowedVariables: []
 MethodLength:
