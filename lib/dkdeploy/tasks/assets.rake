@@ -87,10 +87,8 @@ namespace :assets do
     asset_default_content = ask_array_variable(args, :asset_default_content, 'questions.asset_default_content')
 
     config_path = File.join 'config', 'preseed'
-    on release_roles :web do
-      asset_default_content.each do |asset|
-        assets_upload asset, config_path
-      end
+    asset_default_content.each do |asset|
+      assets_upload asset, config_path
     end
   end
 end
