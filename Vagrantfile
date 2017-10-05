@@ -5,14 +5,7 @@ unless Vagrant.has_plugin?('vagrant-berkshelf')
   abort
 end
 
-unless Vagrant.has_plugin?('vagrant-omnibus')
-  puts "Please install vagrant plugin vagrant-omnibus first\n"
-  puts " vagrant plugin install vagrant-omnibus\n\n"
-  puts "Exit vagrant\n\n"
-  abort
-end
-
-Vagrant.require_version '~> 1.8.1'
+Vagrant.require_version '~> 2.0.0'
 chef_version = '12.9.41'
 
 Vagrant.configure(2) do |config|
@@ -23,15 +16,15 @@ Vagrant.configure(2) do |config|
   config.vm.box = 'ubuntu/trusty64'
   config.vm.box_check_update = false
   config.berkshelf.enabled = true
-  config.omnibus.chef_version = chef_version
 
   config.vm.define('dkdeploy-core', primary: true) do |master_config|
     master_config.vm.network 'private_network', ip: ip_address
 
     # Chef settings
     master_config.vm.provision :chef_solo do |chef|
+      chef.install = true
+      chef.channel = 'stable'
       chef.version = chef_version
-      chef.install = false # omnibus does it already
       chef.log_level = :info
       chef.add_recipe 'dkdeploy-core'
     end
