@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - tasks around MySQL slow log
 - add `utils:create_local_temp_directory` task
 - support for dkdeploy-test_environment v2.0.0
+- Vagrant 2.0.x support
 
 ### Fixed
 - set group permissions for /var/www in Chef cookbook (Vagrant)
