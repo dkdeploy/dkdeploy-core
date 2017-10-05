@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - set proper gem homepage
 - add travis support
 - improved code syntax according to RuboCop
+- install `mysql` instead of `mysql-connector-c`
 
 ## [8.0.0] - 2016-06-20
 ### Summary
