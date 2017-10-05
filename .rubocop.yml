@@ -20,3 +20,5 @@ CyclomaticComplexity:
   Max: 10
 Metrics/BlockLength:
   Enabled: false
+Style/FormatStringToken:
+  Enabled: false

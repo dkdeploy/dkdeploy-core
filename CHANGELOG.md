@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - add `utils:create_local_temp_directory` task
 - support for dkdeploy-test_environment v2.0.0
 - Vagrant 2.0.x support
+- rubocop upgrade to 0.50
 
 ### Fixed
 - set group permissions for /var/www in Chef cookbook (Vagrant)

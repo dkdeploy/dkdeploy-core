@@ -1,5 +1,3 @@
-# coding: utf-8
-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'dkdeploy/core/version'
@@ -24,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec', '~> 3.5'
   spec.add_development_dependency 'cucumber', '~> 2.4'
-  spec.add_development_dependency 'rubocop', '~> 0.48'
+  spec.add_development_dependency 'rubocop', '~> 0.50.0'
   spec.add_development_dependency 'aruba', '~> 0.14.1'
   spec.add_development_dependency 'mysql2', '~> 0.3'
   spec.add_development_dependency 'pry', '~> 0.10.3'
