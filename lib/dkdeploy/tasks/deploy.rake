@@ -58,7 +58,7 @@ namespace :deploy do
     on release_roles(:all) do
       begin
         rollback_archives = capture(:ls, '-x', deploy_path.join('rolled-back-release-*.tar.gz')).split
-      rescue
+      rescue SSHKit::StandardError
         rollback_archives = []
       end
 
