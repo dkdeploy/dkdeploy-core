@@ -79,7 +79,7 @@ Add the virtual box alias to your `hosts` file
 ## Contributing
 
 1. Install [git flow](https://github.com/nvie/gitflow)
-2. Install [Homebrew](http://brew.sh/) and run `brew install mysql-connector-c`
+2. Install [Homebrew](http://brew.sh/) and run `brew install mysql`
 3. Install [NodeJS](https://nodejs.org) (supported: v0.12.7) via `brew install nodejs`
 4. Install [Bower](http://bower.io) (supported: v1.7.9) via `npm install -g bower@1.7.9`
 5. If project is not checked out already do git clone `git@github.com:dkdeploy/dkdeploy-core.git`
