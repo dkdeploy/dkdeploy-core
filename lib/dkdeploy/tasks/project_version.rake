@@ -3,7 +3,6 @@ require 'dkdeploy/i18n'
 require 'dkdeploy/constants'
 
 include Capistrano::DSL
-include SSHKit::DSL
 
 namespace :project_version do
   desc 'Update Version file on server'

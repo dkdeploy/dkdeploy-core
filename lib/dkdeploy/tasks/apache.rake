@@ -3,7 +3,6 @@ require 'capistrano/i18n'
 require 'dkdeploy/i18n'
 
 include Capistrano::DSL
-include SSHKit::DSL
 
 namespace :apache do
   desc 'Render .htaccess to web root from erb template(s)'

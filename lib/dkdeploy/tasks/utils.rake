@@ -2,7 +2,6 @@ require 'capistrano/i18n'
 require 'dkdeploy/i18n'
 
 include Capistrano::DSL
-include SSHKit::DSL
 
 namespace :utils do
   desc 'Get current webroot path in releases'

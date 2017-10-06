@@ -5,7 +5,6 @@ require 'sshkit/dsl'
 require 'capistrano/dsl'
 
 include Capistrano::DSL
-include SSHKit::DSL
 include Dkdeploy::RollbackManager
 
 namespace :maintenance do
