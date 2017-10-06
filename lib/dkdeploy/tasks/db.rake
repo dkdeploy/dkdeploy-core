@@ -51,7 +51,7 @@ namespace :db do
         execute :mysql,
                 '-u', fetch(:db_username),
                 '-p', '-h', fetch(:db_host), '-P', fetch(:db_port), '-e', 'exit',
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(fetch(:db_password))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(fetch(:db_password))
       rescue SSHKit::Command::Failed
         error I18n.t('errors.connection_failed', scope: :dkdeploy)
         exit 1
@@ -92,7 +92,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_file_name}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       ensure
         execute :rm, '-f', remote_zipped_file_name
         execute :rm, '-f', remote_file_name
@@ -256,7 +256,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_default_content_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       ensure
         execute :rm, '-f', remote_default_content_file
         execute :rm, '-f', remote_zipped_default_content_file
@@ -282,7 +282,7 @@ namespace :db do
                 '-u', db_settings.fetch('username'), '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_default_structure_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       ensure
         execute :rm, '-f', remote_default_structure_file
         execute :rm, '-f', remote_zipped_default_structure_file
@@ -390,7 +390,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_dump_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       end
     rescue SSHKit::Command::Failed => exception
       run_locally do
