@@ -1,5 +1,5 @@
 module Dkdeploy
-  # TYPO3 dsl api
+  # dsl api
   module DSL
     # Execute a rake/capistrano task only for given server
     #
