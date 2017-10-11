@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - rubocop upgrade to 0.50
 - update capistrano to 3.8.0
 - remove jenkins release suffix
+- configuration option `additional_ignore_tables` changes from `string` to `array
 
 ### Fixed
 - set group permissions for /var/www in Chef cookbook (Vagrant)

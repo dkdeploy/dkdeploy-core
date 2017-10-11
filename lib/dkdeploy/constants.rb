@@ -71,11 +71,11 @@ module Dkdeploy
 
     # List of table names to be ignored when dumping from database defined via Capistrano variable or environment variable
     #
-    # @return [String]
+    # @return [Array]
     def additional_ignore_tables
-      env_string_list = ENV.fetch('ADDITIONAL_IGNORE_TABLES', '').split ' '
-      cap_string_list = fetch(:additional_ignore_tables, '').split ' '
-      env_string_list | cap_string_list
+      env_array_list = ENV.fetch('ADDITIONAL_IGNORE_TABLES', '').split ' '
+      cap_array_list = fetch(:additional_ignore_tables, [])
+      env_array_list | cap_array_list
     end
 
     # List of table names to be ignored when dumping from database
