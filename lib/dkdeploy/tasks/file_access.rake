@@ -11,7 +11,7 @@ namespace :file_access do
 
   desc 'Set standard defined owner and group on the shared path'
   task :set_owner_group_of_shared_path do
-    on release_roles :app do
+    on release_roles :all do
       paths = merge_paths_with_resolved_symlinks self, shared_path
       execute :chown, "#{fetch(:default_file_access_owner_of_shared_path)}:#{fetch(:default_file_access_group_of_shared_path)}", paths
     end
@@ -19,7 +19,7 @@ namespace :file_access do
 
   desc 'Set recursively standard defined owner and group on the release path'
   task :set_owner_group_of_release_path do
-    on release_roles :app do
+    on release_roles :all do
       paths = merge_paths_with_resolved_symlinks self, release_path
       execute :chown, '-R', "#{fetch(:default_file_access_owner_of_release_path)}:#{fetch(:default_file_access_group_of_release_path)}", paths
     end
@@ -30,7 +30,7 @@ namespace :file_access do
 
   desc 'Set standard defined file permissions on the shared path'
   task :set_permissions_of_shared_path do
-    on release_roles :app do
+    on release_roles :all do
       paths = merge_paths_with_resolved_symlinks self, shared_path
       execute :chmod, fetch(:default_file_access_mode_of_shared_path), paths
     end
@@ -38,7 +38,7 @@ namespace :file_access do
 
   desc 'Set recursively standard defined file permissions on the release path'
   task :set_permissions_of_release_path do
-    on release_roles :app do
+    on release_roles :all do
       paths = merge_paths_with_resolved_symlinks self, release_path
       execute :chmod, '-R', fetch(:default_file_access_mode_of_release_path), paths
     end

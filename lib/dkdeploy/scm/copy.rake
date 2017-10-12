@@ -37,7 +37,7 @@ namespace :copy do
   # extracting it to the configured directory.
   #
   task :copy_archive_to_server do
-    on release_roles :app do
+    on release_roles :all do
       info I18n.t('file.upload', file: 'archive', target: copy_plugin.remote_tmp_dir, scope: :dkdeploy)
       execute :mkdir, '-p', copy_plugin.remote_tmp_dir
 
@@ -63,7 +63,7 @@ namespace :copy do
     end
 
     # removes the remote temp path including the uploaded archive
-    on release_roles :app do
+    on release_roles :all do
       info I18n.t('file.remove', path: copy_plugin.remote_archive_path, scope: :dkdeploy)
       execute :rm, '-rf', copy_plugin.remote_tmp_dir
     end
