@@ -91,3 +91,7 @@ Feature: Test tasks for namespace 'db'
 		And I successfully run `cap dev db:add_default_content`
 		And I wait 5 second to let the database commit the transaction
 		Then the database should have a value `first preseed value` in table `preseed_table` for column `value`
+
+	Scenario: Check error answer of a broken SQL syntax
+		When I run `cap dev "db:sql_error"`
+		Then the output should match /ERROR 1064/
