@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - install `mysql` instead of `mysql-connector-c`
 - remove sshkit dsl includes
 - remove TYPO3 specific configuration
+- change some SCM roles from app to all
 
 ## [8.0.0] - 2016-06-20
 ### Summary
