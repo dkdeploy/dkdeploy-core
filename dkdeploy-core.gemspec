@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.name          = 'dkdeploy-core'
   spec.version       = Dkdeploy::Core::Version
   spec.license       = 'MIT'
-  spec.authors       = ['Lars Tode', 'Timo Webler', 'Kieran Hayes', 'Nicolai Reuschling', 'Johannes Goslar', 'Luka Lüdicke']
-  spec.email         = %w[lars.tode@dkd.de timo.webler@dkd.de kieran.hayes@dkd.de nicolai.reuschling@dkd.de johannes.goslar@dkd.de luka.luedicke@dkd.de]
+  spec.authors       = ['Timo Webler', 'Nicolai Reuschling']
+  spec.email         = %w[timo.webler@dkd.de nicolai.reuschling@dkd.de]
   spec.description   = 'dkd basic deployment tasks and strategies'
   spec.summary       = 'dkd basic deployment tasks and strategies'
   spec.homepage      = 'https://github.com/dkdeploy/dkdeploy-core'
@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.50.0'
   spec.add_development_dependency 'aruba', '~> 0.14.1'
   spec.add_development_dependency 'mysql2', '~> 0.3'
-  spec.add_development_dependency 'pry', '~> 0.10.3'
+  spec.add_development_dependency 'pry', '~> 0.10'
   spec.add_development_dependency 'dkdeploy-test_environment', '~> 2.0'
 
   spec.add_dependency 'capistrano', '~> 3.9.0'

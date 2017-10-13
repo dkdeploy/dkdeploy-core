@@ -2,6 +2,8 @@
 
 The dkdeploy core maintainers would like to recognize following contributors (in alphabetic order):
 
+- Jan Bergmann
+- Dimitri Ebert
 - Sascha Egerer
 - Christoph Gerold
 - Johannes Goslar

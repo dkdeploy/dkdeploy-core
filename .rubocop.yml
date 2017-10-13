@@ -6,6 +6,9 @@ AllCops:
     - 'Vagrantfile'
     - 'vendor/**/*'
   TargetRubyVersion: 2.2
+  ExtraDetails: true
+  DisplayStyleGuide: true
+  DisplayCopNames: true
 GlobalVars:
   AllowedVariables: []
 MethodLength:
