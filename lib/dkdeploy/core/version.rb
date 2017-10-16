@@ -3,7 +3,7 @@ module Dkdeploy
     # Class for version number
     #
     class Version
-      MAJOR = 8
+      MAJOR = 9
       MINOR = 0
       PATCH = 0
 
