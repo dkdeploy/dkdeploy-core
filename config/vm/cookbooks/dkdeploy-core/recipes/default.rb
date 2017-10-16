@@ -22,6 +22,18 @@ mysql_service 'default' do
   # Need for remote connection
   bind_address '0.0.0.0'
   action [:create, :start]
+  run_group 'vagrant'
+  run_user 'vagrant'
+end
+
+mysql_config 'default' do
+  instance 'default' # necessary in some cases, causes hanging on provisioning https://github.com/chef-cookbooks/mysql/issues/387
+  # use different user to allow capistrano access to log file
+  owner 'vagrant'
+  group 'vagrant'
+  source 'my_extra_settings.erb'
+  notifies :restart, 'mysql_service[default]'
+  action :create
 end
 
 mysql2_chef_gem 'default' do
@@ -50,7 +62,7 @@ end
 
 directory '/var/www' do
   owner 'vagrant'
-  owner 'vagrant'
+  group 'vagrant'
   mode '0770'
   action :create
 end

@@ -18,5 +18,5 @@ TEST_APPLICATION.mysql_connection_settings = { host: 'dkdeploy-core.dev', userna
 # The official way via Bundler.with_clean_env did not work properly here
 Aruba.configure do |config|
   config.command_runtime_environment = { 'BUNDLE_GEMFILE' => File.join(TEST_APPLICATION.test_app_path, 'Gemfile') }
-  config.exit_timeout = 10
+  config.exit_timeout = 30
 end

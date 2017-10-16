@@ -1,6 +1,9 @@
-# Dkdeploy::Core
+![dkdeploy](assets/dkdeploy-logo.png)
 
-[![Gem Version](https://badge.fury.io/rb/dkdeploy-core.svg)](https://badge.fury.io/rb/dkdeploy-core)
+# dkdeploy::core
+
+[![Build Status](https://travis-ci.org/dkdeploy/dkdeploy-core.svg?branch=develop)](https://travis-ci.org/dkdeploy/dkdeploy-core)
+[![Gem Version](https://badge.fury.io/rb/dkdeploy-core.svg)](https://badge.fury.io/rb/dkdeploy-core) [![Inline docs](http://inch-ci.org/github/dkdeploy/dkdeploy-core.svg?branch=develop)](http://inch-ci.org/github/dkdeploy/dkdeploy-core)
 
 ## Description
 
@@ -10,7 +13,7 @@ This Rubygem `dkdeploy-core` represents the extension of [Capistrano](http://cap
 
 Add this line to your application's `Gemfile`
 
-	gem 'dkdeploy-core', '~> 8.0'
+	gem 'dkdeploy-core', '~> 9.0'
 
 and then execute
 
@@ -61,7 +64,7 @@ The complete list of the dkdeploy constants you find in `/lib/capistrano/dkdeplo
 
 ### Prerequisite
 
-rvm (v1.25.x) with installed Ruby 2.1.
+rvm (v1.29.x) with installed Ruby 2.2.
 
 Add the virtual box alias to your `hosts` file
 
@@ -76,7 +79,7 @@ Add the virtual box alias to your `hosts` file
 ## Contributing
 
 1. Install [git flow](https://github.com/nvie/gitflow)
-2. Install [Homebrew](http://brew.sh/) and run `brew install mysql-connector-c`
+2. Install [Homebrew](http://brew.sh/) and run `brew install mysql`
 3. Install [NodeJS](https://nodejs.org) (supported: v0.12.7) via `brew install nodejs`
 4. Install [Bower](http://bower.io) (supported: v1.7.9) via `npm install -g bower@1.7.9`
 5. If project is not checked out already do git clone `git@github.com:dkdeploy/dkdeploy-core.git`

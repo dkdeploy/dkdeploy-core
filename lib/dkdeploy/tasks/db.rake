@@ -1,7 +1,7 @@
 require 'dkdeploy/constants'
 require 'dkdeploy/helpers/common'
 require 'dkdeploy/helpers/db'
-require 'dkdeploy/interaction_handler/password'
+require 'dkdeploy/interaction_handler/mysql'
 require 'digest/md5'
 require 'yaml'
 
@@ -11,8 +11,7 @@ include Dkdeploy::Helpers::DB
 include Capistrano::DSL
 
 namespace :db do
-  task :read_db_settings do
-    FileUtils.mkdir_p 'temp'
+  task read_db_settings: 'utils:create_local_temp_directory' do
     on release_roles :app do
       unless test("[ -f #{remote_database_config_path} ]")
         error I18n.t('errors.database_config_file_missing', scope: :dkdeploy)
@@ -52,7 +51,7 @@ namespace :db do
         execute :mysql,
                 '-u', fetch(:db_username),
                 '-p', '-h', fetch(:db_host), '-P', fetch(:db_port), '-e', 'exit',
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(fetch(:db_password))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(fetch(:db_password))
       rescue SSHKit::Command::Failed
         error I18n.t('errors.connection_failed', scope: :dkdeploy)
         exit 1
@@ -93,7 +92,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_file_name}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       ensure
         execute :rm, '-f', remote_zipped_file_name
         execute :rm, '-f', remote_file_name
@@ -102,12 +101,10 @@ namespace :db do
   end
 
   desc 'Dump complete database without cache table content to local temp folder'
-  task download: [:download_structure, :download_content]
+  task download: %i[download_structure download_content]
 
   desc 'Dumps complete database structure without content'
-  task :download_structure do
-    FileUtils.mkdir_p 'temp'
-
+  task download_structure: 'utils:create_local_temp_directory' do
     dump_file = db_dump_file_structure
     remote_dump_file = File.join(fetch(:deploy_to), dump_file)
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
@@ -124,7 +121,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '>', remote_dump_file,
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
         execute :gzip, remote_dump_file
         download! remote_zipped_dump_file, 'temp', via: :scp
       ensure
@@ -135,9 +132,7 @@ namespace :db do
   end
 
   desc 'Dump complete database content without cache tables and structure to local temp folder'
-  task :download_content do
-    FileUtils.mkdir_p 'temp'
-
+  task download_content: 'utils:create_local_temp_directory' do
     dump_file = db_dump_file_content
     remote_dump_file = File.join(fetch(:deploy_to), dump_file)
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
@@ -159,7 +154,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), ignore_tables_command_line, db_settings.fetch('name'),
                 '>', remote_dump_file,
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
         execute :gzip, remote_dump_file
         download! remote_zipped_dump_file, 'temp', via: :scp
       ensure
@@ -170,10 +165,8 @@ namespace :db do
   end
 
   desc 'Dump content of a database table to local temp folder'
-  task :dump_table, :table_name do |_, args|
+  task :dump_table, [:table_name] => ['utils:create_local_temp_directory'] do |_, args|
     table_name = ask_variable(args, :table_name, 'questions.database.table_name')
-
-    FileUtils.mkdir_p 'temp'
 
     dump_file = db_dump_file table_name
     zipped_dump_file = File.join('temp', "#{dump_file}.gz")
@@ -192,7 +185,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'), table_name,
                 '>', remote_dump_file,
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
         execute :gzip, remote_dump_file
         download! remote_zipped_dump_file, zipped_dump_file, via: :scp
       ensure
@@ -230,7 +223,7 @@ namespace :db do
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
                 db_settings.fetch('name'), table_names.join(' '),
                 '>', remote_file_name,
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
         execute :gzip, remote_file_name
         download! remote_zipped_file, local_zipped_file, via: :scp
       ensure
@@ -263,7 +256,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_default_content_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       ensure
         execute :rm, '-f', remote_default_content_file
         execute :rm, '-f', remote_zipped_default_content_file
@@ -289,7 +282,7 @@ namespace :db do
                 '-u', db_settings.fetch('username'), '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_default_structure_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       ensure
         execute :rm, '-f', remote_default_structure_file
         execute :rm, '-f', remote_zipped_default_structure_file
@@ -326,7 +319,7 @@ namespace :db do
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
                 db_settings.fetch('name'), table_names,
                 '>', remote_file_name,
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
         execute :gzip, remote_file_name
         download! remote_zipped_file, local_zipped_file, via: :scp
       ensure
@@ -397,7 +390,7 @@ namespace :db do
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
                 '-e', "'source #{remote_dump_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::Password.new(db_settings.fetch('password'))
+                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       end
     rescue SSHKit::Command::Failed => exception
       run_locally do

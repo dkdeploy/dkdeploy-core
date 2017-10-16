@@ -3,9 +3,11 @@ require 'i18n'
 en = {
   file: {
     not_exists: 'File %{file} does not exist.',
+    not_exists_or_not_accessible_on_host: 'File %{file} does not exist on host %{host} or is not accessible.',
     not_exists_on_host: 'File %{file} does not exit on host %{host}.',
     upload: 'Uploading %{file} to %{target}.',
     download: 'Downloading %{file} to %{target}.',
+    download_from_host: 'Downloading %{file} to %{target} from %{host}.',
     copy: 'Copying %{file} to %{target}.',
     remove: 'Removing %{path}.'
   },
@@ -106,6 +108,10 @@ en = {
       enabled: 'The %{mode} maintenance mode has successfully been enabled.',
       disabled: 'The %{mode} maintenance mode has successfully been disabled.',
       can_not_disable_by_reason_of_permanent: "Maintenance permanent mode has been enabled. Please call the task 'maintenance:disable_permanent'."
+    },
+    mysql: {
+      clear_slow_log: 'MySQL slow log file %{file} on host %{host} has been cleared',
+      analyze_slow_log: 'Generating slow log analyze file for host %{host)'
     },
     project_version: {
       update: {

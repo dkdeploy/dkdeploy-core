@@ -2,7 +2,6 @@ require 'capistrano/i18n'
 require 'dkdeploy/i18n'
 
 include Capistrano::DSL
-include SSHKit::DSL
 
 namespace :utils do
   desc 'Get current webroot path in releases'
@@ -88,7 +87,7 @@ namespace :utils do
     # Append '/' to source directory
     rsync_path = File.join(rsync_path, '')
 
-    rsync_command = %w(--verbose --recursive --perms --times --perms --perms --compress --force --cvs-exclude)
+    rsync_command = %w[--verbose --recursive --perms --times --perms --perms --compress --force --cvs-exclude]
 
     # Build exclude parameter
     rsync_exclude.each do |exclude|
@@ -137,5 +136,10 @@ namespace :utils do
         execute :mkdir, '-p', File.join(shared_path, directory)
       end
     end
+  end
+
+  desc 'Create local temporary directory'
+  task :create_local_temp_directory do
+    run_locally { execute :mkdir, '-p', local_dump_path }
   end
 end

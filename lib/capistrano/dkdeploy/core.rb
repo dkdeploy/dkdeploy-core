@@ -2,6 +2,10 @@ include Capistrano::DSL
 
 require 'dkdeploy/rollback_manager'
 
+# Install copy plugin
+require 'dkdeploy/scm/copy'
+install_plugin Dkdeploy::SCM::Copy
+
 # Load dkdeploy tasks
 load File.expand_path('../../../dkdeploy/tasks/deploy.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/fail.rake', __FILE__)
@@ -15,6 +19,7 @@ load File.expand_path('../../../dkdeploy/tasks/db.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/enhanced_symlinks.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/current_folder.rake', __FILE__)
 load File.expand_path('../../../dkdeploy/tasks/bower.rake', __FILE__)
+load File.expand_path('../../../dkdeploy/tasks/mysql.rake', __FILE__)
 
 # Hook into symlink related tasks
 after 'deploy:check:linked_dirs', 'deploy:enhanced_symlinks:check:linked_dirs'
@@ -25,27 +30,8 @@ after 'deploy:symlink:linked_files', 'deploy:enhanced_symlinks:symlink:linked_fi
 
 namespace :load do
   task :defaults do
-    # Set scm to new scm "copy"
-    set :scm, :copy
-
-    # Set default values for copy scm
-    set :copy_source, 'htdocs'
-    set :copy_exclude, Array[
-      'vendor/bundle/**',
-      'Gemfile*',
-      '**/.git',
-      '**/.svn',
-      '**/.DS_Store',
-      '.settings',
-      '.project',
-      '.buildpath',
-      'Capfile',
-      'Thumbs.db',
-      'composer.lock'
-    ]
-
     # Set default web root paths
-    set :local_web_root_path, -> { fetch(:copy_source) }
+    set(:local_web_root_path, -> { fetch(:copy_source) })
     set :remote_web_root_path, '.'
 
     # Set default version file path
@@ -71,8 +57,8 @@ namespace :load do
     set :keep_rollback_archives, 5
 
     # List of bower.json files
-    set :bower_path, -> { fetch(:copy_source) }
-    set :bower_paths, -> { Array(fetch(:copy_source)) }
+    set(:bower_path, -> { fetch(:copy_source) })
+    set(:bower_paths, -> { Array(fetch(:copy_source)) })
 
     # List of filters for file_access:set_selected_custom_access
     set :selected_custom_file_access, []
@@ -84,5 +70,8 @@ namespace :load do
 
     # Airbrush configuration
     set :format_options, command_output: true, log_file: nil, truncate: false
+
+    # MySQL slow_log
+    set :mysql_slow_log, ''
   end
 end

@@ -6,7 +6,6 @@ require 'dkdeploy/interaction_handler/password'
 require 'dkdeploy/constants'
 
 include Capistrano::DSL
-include SSHKit::DSL
 include Dkdeploy::Helpers::Common
 include Dkdeploy::Helpers::Assets
 include Dkdeploy::Constants

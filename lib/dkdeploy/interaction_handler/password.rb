@@ -1,9 +1,10 @@
 module Dkdeploy
   module InteractionHandler
     # Interaction handler for password
-    #
-    # @attr [String] password The password to send to terminal
     class Password
+      # Interaction handler for password
+      #
+      # @attr [String] password The password to send to terminal
       def initialize(password)
         @password = password
       end

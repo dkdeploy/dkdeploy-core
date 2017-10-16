@@ -4,6 +4,11 @@ AllCops:
     - 'spec/fixtures/application/htdocs/stylesheets/**/config.rb'
     - 'config/**/*'
     - 'Vagrantfile'
+    - 'vendor/**/*'
+  TargetRubyVersion: 2.2
+  ExtraDetails: true
+  DisplayStyleGuide: true
+  DisplayCopNames: true
 GlobalVars:
   AllowedVariables: []
 MethodLength:
@@ -16,3 +21,7 @@ BracesAroundHashParameters:
   Enabled: false
 CyclomaticComplexity:
   Max: 10
+Metrics/BlockLength:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false

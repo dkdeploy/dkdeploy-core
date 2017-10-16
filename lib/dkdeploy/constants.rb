@@ -66,32 +66,16 @@ module Dkdeploy
     #
     # @return [String]
     def default_ignore_tables
-      %w(
-        cache_extensions cache_hash cache_imagesizes cache_md5params
-        cache_pages cache_pagesection cache_sys_dmail_stat cache_treelist cache_typo3temp_log
-        cachingframework_cache_hash cachingframework_cache_hash_tags cachingframework_cache_pages
-        cachingframework_cache_pages_tags cachingframework_cache_pagesection
-        cachingframework_cache_pagesection_tags sys_workspace_cache sys_workspace_cache_tags
-        tt_news_cache tt_news_cache_tags tx_extbase_cache_object tx_extbase_cache_object_tags
-        tx_extbase_cache_reflection tx_extbase_cache_reflection_tags tx_realurl_chashcache
-        tx_realurl_pathcache tx_realurl_urldecodecache tx_realurl_urlencodecache be_users be_sessions
-        sys_domain fe_users fe_sessions fe_session_data
-        cf_cache_hash cf_cache_hash_tags cf_cache_pages cf_cache_pages_tags cf_cache_pagesection
-        cf_cache_pagesection_tags cf_cache_rootline cf_cache_rootline_tags cf_extbase_datamapfactory_datamap
-        cf_extbase_datamapfactory_datamap_tags cf_extbase_object cf_extbase_object_tags
-        cf_extbase_reflection cf_extbase_reflection_tags cf_extbase_typo3dbbackend_queries
-        cf_extbase_typo3dbbackend_queries_tags cf_extbase_typo3dbbackend_tablecolumns
-        cf_extbase_typo3dbbackend_tablecolumns_tags
-      )
+      %w[]
     end
 
     # List of table names to be ignored when dumping from database defined via Capistrano variable or environment variable
     #
-    # @return [String]
+    # @return [Array]
     def additional_ignore_tables
-      env_string_list = ENV.fetch('ADDITIONAL_IGNORE_TABLES', '').split ' '
-      cap_string_list = fetch(:additional_ignore_tables, '').split ' '
-      env_string_list | cap_string_list
+      env_array_list = ENV.fetch('ADDITIONAL_IGNORE_TABLES', '').split ' '
+      cap_array_list = fetch(:additional_ignore_tables, [])
+      env_array_list | cap_array_list
     end
 
     # List of table names to be ignored when dumping from database
@@ -99,58 +83,6 @@ module Dkdeploy
     # @return [String]
     def ignore_tables
       default_ignore_tables | additional_ignore_tables
-    end
-
-    #####################################################
-    # Local temporary directory constants
-    #####################################################
-
-    # Archive filename as singleton
-    # Note: if the archive filename doesn't already exist it will be generated
-    #
-    # @return [String]
-    def archive_filename
-      @archive_filename ||= Dir::Tmpname.make_tmpname [application + '_', '.tar.gz'], nil
-    end
-
-    # Local temporary directory path as singleton
-    # Note: if the directory doesn't already exist it will be created
-    #
-    # @return [String]
-    def local_tmp_dir
-      @local_tmp_dir ||= Dir.mktmpdir
-    end
-
-    # Archive path in a local temporary directory
-    #
-    # @return [String]
-    def local_exclude_path
-      File.join local_tmp_dir, 'exclude.txt'
-    end
-
-    # Archive path in a local temporary directory
-    #
-    # @return [String]
-    def local_archive_path
-      File.join local_tmp_dir, archive_filename
-    end
-
-    #####################################################
-    # remote paths constants
-    #####################################################
-
-    # Remote temporary directory path
-    #
-    # @return [String]
-    def remote_tmp_dir
-      File.join fetch(:tmp_dir), application
-    end
-
-    # Archive path in a remote temporary directory
-    #
-    # @return [String]
-    def remote_archive_path
-      File.join remote_tmp_dir, archive_filename
     end
   end
 end
