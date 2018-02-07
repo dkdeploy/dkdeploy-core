@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry', '~> 0.10'
   spec.add_development_dependency 'dkdeploy-test_environment', '~> 2.0'
 
-  spec.add_dependency 'capistrano', '~> 3.9.0'
+  spec.add_dependency 'capistrano', '~> 3.10.1'
   spec.add_dependency 'highline', '~> 1.7.1'
 end
