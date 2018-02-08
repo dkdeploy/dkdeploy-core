@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Use correct capistrano context at copy scm
+- Update capistrano 3.10.1
 
 ## [9.0.0]
 ### Summary
