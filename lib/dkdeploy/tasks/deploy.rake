@@ -22,7 +22,7 @@ namespace :deploy do
       end
     end
     # Backup and remove last release
-    invoke 'deploy:cleanup_rollback'
+    invoke! 'deploy:cleanup_rollback'
 
     run_locally do
       error I18n.t('rollback_tasks', tasks_for_rollback: tasks_for_rollback.join(', '), scope: :dkdeploy) unless tasks_for_rollback.empty?
@@ -33,8 +33,7 @@ namespace :deploy do
       next unless Rake::Task.task_defined? task_name
 
       # call rollback task
-      Rake::Task[task_name].reenable
-      invoke task_name
+      invoke! task_name
     end
 
     run_locally do

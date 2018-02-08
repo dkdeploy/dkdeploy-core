@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Use correct capistrano context at copy scm
 - Update capistrano 3.10.1
+- Always execute tasks for each server or at rollback
 
 ## [9.0.0]
 ### Summary
