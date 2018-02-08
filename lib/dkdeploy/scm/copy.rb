@@ -25,6 +25,8 @@ module Dkdeploy
           'Thumbs.db',
           'composer.lock'
         ]
+        set_if_empty :copy_archive_filename, -> { Dir::Tmpname.make_tmpname([fetch(:application) + '_', '.tar.gz'], nil) }
+        set_if_empty :copy_local_tmp_dir, Dir.mktmpdir
       end
 
       def register_hooks
@@ -34,51 +36,9 @@ module Dkdeploy
       end
 
       def define_tasks
-        eval_rakefile File.expand_path('../copy.rake', __FILE__)
-      end
-
-      # Archive filename as singleton
-      # Note: if the archive filename doesn't already exist it will be generated
-      #
-      # @return [String]
-      def archive_filename
-        @archive_filename ||= Dir::Tmpname.make_tmpname [application + '_', '.tar.gz'], nil
-      end
-
-      # Local temporary directory path as singleton
-      # Note: if the directory doesn't already exist it will be created
-      #
-      # @return [String]
-      def local_tmp_dir
-        @local_tmp_dir ||= Dir.mktmpdir
-      end
-
-      # Archive path in a local temporary directory
-      #
-      # @return [String]
-      def local_exclude_path
-        File.join local_tmp_dir, 'exclude.txt'
-      end
-
-      # Archive path in a local temporary directory
-      #
-      # @return [String]
-      def local_archive_path
-        File.join local_tmp_dir, archive_filename
-      end
-
-      # Remote temporary directory path
-      #
-      # @return [String]
-      def remote_tmp_dir
-        File.join fetch(:tmp_dir), application
-      end
-
-      # Archive path in a remote temporary directory
-      #
-      # @return [String]
-      def remote_archive_path
-        File.join remote_tmp_dir, archive_filename
+        # Don not use method "eval_rakefile" to load rake tasks.
+        # "eval_rakefile" defined wrong context and use sskit dsl api instead of capistrano dsl.
+        load File.expand_path('../copy.rake', __FILE__)
       end
     end
   end

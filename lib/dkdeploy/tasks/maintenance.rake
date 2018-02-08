@@ -1,7 +1,6 @@
 require 'json'
 require 'i18n'
 require 'dkdeploy/i18n'
-require 'sshkit/dsl'
 require 'capistrano/dsl'
 
 include Capistrano::DSL
