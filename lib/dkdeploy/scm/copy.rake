@@ -1,6 +1,3 @@
-# This trick lets us access the copy plugin within `on` blocks.
-copy_plugin = self
-
 namespace :copy do
   desc 'Check if all configuration variables and copy sources exist'
   task :check do
@@ -24,11 +21,11 @@ namespace :copy do
 
       # generate an exclude.txt file with the patterns to be excluded
       exclude_content = copy_exclude.join("\n")
-      File.write(copy_plugin.local_exclude_path, exclude_content)
+      File.write(local_exclude_path, exclude_content)
 
       # build the tar archive excluding the patterns from exclude.txt
       within copy_source do
-        execute :tar, '-X ' + copy_plugin.local_exclude_path, '-cpzf', copy_plugin.local_archive_path, '.'
+        execute :tar, '-X ' + local_exclude_path, '-cpzf', local_archive_path, '.'
       end
     end
   end
@@ -38,17 +35,17 @@ namespace :copy do
   #
   task :copy_archive_to_server do
     on release_roles :all do
-      info I18n.t('file.upload', file: 'archive', target: copy_plugin.remote_tmp_dir, scope: :dkdeploy)
-      execute :mkdir, '-p', copy_plugin.remote_tmp_dir
+      info I18n.t('file.upload', file: 'archive', target: remote_tmp_dir, scope: :dkdeploy)
+      execute :mkdir, '-p', remote_tmp_dir
 
-      upload! copy_plugin.local_archive_path, copy_plugin.remote_tmp_dir
+      upload! local_archive_path, remote_tmp_dir
 
       info I18n.t('directory.create', directory: release_path, scope: :dkdeploy)
       execute :mkdir, '-p', release_path
 
       within release_path do
         info I18n.t('tasks.copy.archive.extract', target: release_path, scope: :dkdeploy)
-        execute :tar, '-xpzf', copy_plugin.remote_archive_path
+        execute :tar, '-xpzf', remote_archive_path
       end
     end
   end
@@ -58,19 +55,47 @@ namespace :copy do
   task :clean_up_temporary_sources do
     # remove the local temporary directory
     run_locally do
-      info I18n.t('file.remove', path: copy_plugin.local_tmp_dir, scope: :dkdeploy)
-      execute :rm, '-rf', copy_plugin.local_tmp_dir
+      info I18n.t('file.remove', path: fetch(:copy_local_tmp_dir), scope: :dkdeploy)
+      execute :rm, '-rf', fetch(:copy_local_tmp_dir)
     end
 
     # removes the remote temp path including the uploaded archive
     on release_roles :all do
-      info I18n.t('file.remove', path: copy_plugin.remote_archive_path, scope: :dkdeploy)
-      execute :rm, '-rf', copy_plugin.remote_tmp_dir
+      info I18n.t('file.remove', path: remote_archive_path, scope: :dkdeploy)
+      execute :rm, '-rf', remote_tmp_dir
     end
   end
 
   desc 'Determine the revision that will be deployed'
   task :set_current_revision do
     set :current_revision, I18n.t('log.revision_log_message', copy_source: fetch(:copy_source), time: Time.now, scope: :dkdeploy)
+  end
+
+  # Archive path in a local temporary directory
+  #
+  # @return [String]
+  def local_exclude_path
+    File.join fetch(:copy_local_tmp_dir), 'exclude.txt'
+  end
+
+  # Archive path in a local temporary directory
+  #
+  # @return [String]
+  def local_archive_path
+    File.join fetch(:copy_local_tmp_dir), fetch(:copy_archive_filename)
+  end
+
+  # Remote temporary directory path
+  #
+  # @return [String]
+  def remote_tmp_dir
+    File.join fetch(:tmp_dir), application
+  end
+
+  # Archive path in a remote temporary directory
+  #
+  # @return [String]
+  def remote_archive_path
+    File.join remote_tmp_dir, fetch(:copy_archive_filename)
   end
 end
