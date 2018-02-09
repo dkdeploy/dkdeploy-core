@@ -13,7 +13,7 @@ This Rubygem `dkdeploy-core` represents the extension of [Capistrano](http://cap
 
 Add this line to your application's `Gemfile`
 
-	gem 'dkdeploy-core', '~> 9.0'
+	gem 'dkdeploy-core', '~> 9.1'
 
 and then execute
 
