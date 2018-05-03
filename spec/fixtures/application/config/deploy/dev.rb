@@ -1,5 +1,5 @@
 set :deploy_to, '/var/www/dkdeploy'
-server 'dkdeploy-core.dev', roles: %w[web app backend db], primary: true
+server 'dkdeploy-core.test', roles: %w[web app backend db], primary: true
 
 # no ssh compression on the dev stage
 set :ssh_options, {

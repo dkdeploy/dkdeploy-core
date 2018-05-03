@@ -363,9 +363,7 @@ namespace :db do
 
     remote_md5 = '' # to allow assignment in block and later comparison
     on primary :backend do
-      if test("[ -f #{remote_dump_md5_file} ]")
-        remote_md5 = capture("cat #{remote_dump_md5_file}")
-      end
+      remote_md5 = capture("cat #{remote_dump_md5_file}") if test("[ -f #{remote_dump_md5_file} ]")
     end
 
     run_locally do

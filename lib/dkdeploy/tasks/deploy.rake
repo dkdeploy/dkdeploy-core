@@ -52,6 +52,7 @@ namespace :deploy do
       end
 
       next if rollback_archives.count <= fetch(:keep_rollback_archives)
+
       info I18n.t('keep_rollback_archives',
                   scope: :dkdeploy,
                   host: host.to_s,

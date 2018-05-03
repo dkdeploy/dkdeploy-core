@@ -7,7 +7,7 @@ module Dkdeploy
     # DB related helpers
     module DB
       def db_dump_file(infix = '')
-        date = DateTime.now.strftime(datetime_format)
+        date = Time.now.strftime(datetime_format)
         ['database', fetch(:stage), infix, date].join('-') << '.sql'
       end
 
@@ -22,12 +22,12 @@ module Dkdeploy
       def db_settings_hash
         {
           'database' => {
-            'host'     => fetch(:db_host),
-            'port'     => fetch(:db_port),
-            'name'     => fetch(:db_name),
+            'host' => fetch(:db_host),
+            'port' => fetch(:db_port),
+            'name' => fetch(:db_name),
             'username' => fetch(:db_username),
             'password' => fetch(:db_password),
-            'charset'  => fetch(:db_charset)
+            'charset' => fetch(:db_charset)
           }
         }
       end

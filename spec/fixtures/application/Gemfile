@@ -6,6 +6,6 @@ gem 'dkdeploy-core', path: '../../'
 gem 'compass', '~> 1.0.3'
 
 # for debugging only
-gem 'pry', '~> 0.10.0'
+gem 'pry', '~> 0.10'
 
 gem 'bundler'

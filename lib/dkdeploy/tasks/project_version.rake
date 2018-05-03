@@ -21,9 +21,7 @@ namespace :project_version do
     on release_roles :app do
       info I18n.t('tasks.project_version.update.update', scope: :dkdeploy)
       # remove the to be replaced remote version file
-      if test " [ -f #{remote_version_file} ] "
-        execute :rm, '-f', remote_version_file
-      end
+      execute :rm, '-f', remote_version_file if test " [ -f #{remote_version_file} ] "
       # upload the current version file
       upload! local_version_file, remote_version_file
     end

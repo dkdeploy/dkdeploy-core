@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Next Version]
+### Summary
+
+- supports Ruby 2.5
+- removes Bower support
+- moved test infrastructure to Ubuntu Xenial
+
 ## [9.1.0]
 ### Summary
 
