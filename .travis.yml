@@ -1,5 +1,7 @@
-sudo: false
+sudo: required
 language: ruby
+services:
+  - docker
 cache: bundler
 rvm:
   - 2.2
@@ -8,7 +10,14 @@ rvm:
   - 2.5
 
 before_install:
+  # Set file permission for local ssh private key
+  - chmod 600 config/docker/ssh/vagrant
+  - docker-compose up -d
+  - # Force root user permissions for authorized keys. Prevent error at ssh connection.
+  - docker-compose exec webapp chown root:root /root/.ssh/authorized_keys
+  - ssh root@localhost -p 5001 -i config/docker/ssh/vagrant -o StrictHostKeyChecking=no 'exit'
   - gem install bundler --no-document
 
 script:
   - bundle exec rubocop
+  - bundle exec cucumber
