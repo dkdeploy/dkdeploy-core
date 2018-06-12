@@ -1,6 +1,6 @@
 [mysqld]
 # configure mysql to produce log with slow queries
-# log-output                     = /var/log/mysql-default/
+# log-output                     = /var/log/mysql/
 slow_query_log                 = 1
 # log file - needs to match :mysql_slow_log in deploy.rb of fixture
-slow_query_log_file            = /var/log/mysql-default/slow-queries.log
+slow_query_log_file            = /var/log/mysql/slow-queries.log

@@ -1,5 +1,7 @@
-sudo: false
+sudo: required
 language: ruby
+services:
+  - docker
 cache: bundler
 rvm:
   - 2.2
@@ -8,7 +10,11 @@ rvm:
   - 2.5
 
 before_install:
+  # Set file permission for local ssh private key
+  - chmod 600 config/docker/ssh/vagrant
+  - docker-compose up -d
   - gem install bundler --no-document
 
 script:
   - bundle exec rubocop
+  - bundle exec cucumber

@@ -1,9 +1,6 @@
 set :application, 'test_app'
 
 SSHKit.config.command_map.prefix[:compass].push 'bundle exec'
-SSHKit.config.command_map.prefix[:chown].push 'sudo'
-SSHKit.config.command_map.prefix[:chgrp].push 'sudo'
-SSHKit.config.command_map.prefix[:chmod].push 'sudo'
 
 set :asset_folders, %w[download]
 set :asset_default_content, %w[download]
@@ -32,7 +29,7 @@ namespace :db do
           charset: 'utf8',
           username: 'root',
           password: 'ilikerandompasswords',
-          host: '127.0.0.1',
+          host: 'dkdeploy-core_db_1',
           port: 3306,
           name: 'dkdeploy_core'
         }

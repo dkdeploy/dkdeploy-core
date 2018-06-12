@@ -87,9 +87,9 @@ Feature: Test tasks for namespace 'file_permissions'
 		Given I extend the development capistrano configuration variable custom_file_access with value {app: {release_path: {catalog: {mode: 'u+rwx,g+rwx,o-wx'}, not_existing: {mode: 'u+rwx,g+rwx,o-wx'}}}}
 		And a remote directory named "releases_path/not_existing" should not exist
 		When I successfully run `cap dev file_access:set_custom_access`
-		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist on host dkdeploy-core.dev"
-		And the output should not contain "sudo chmod  u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/not_existing"
-		And the output should contain "sudo chmod  u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/catalog"
+		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist"
+		And the output should not contain "chmod  u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/not_existing"
+		And the output should contain "chmod  u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/catalog"
 
 	Scenario: Check if the selected_custom file_access_task skips with empty selected_custom_file_access
 		Given I extend the development capistrano configuration variable default_file_access_owner_of_shared_path with value 'test-user'
@@ -101,20 +101,20 @@ Feature: Test tasks for namespace 'file_permissions'
 		Given I extend the development capistrano configuration variable default_file_access_owner_of_shared_path with value 'test-user'
 		And I extend the development capistrano configuration variable selected_custom_file_access with value [:catalog]
 		When I successfully run `cap dev file_access:set_selected_custom_access`
-		Then the output should contain "sudo chown -R test-user /var/www/dkdeploy/current/catalog"
+		Then the output should contain "chown -R test-user /var/www/dkdeploy/current/catalog"
 
 	Scenario: Check if the selected_custom_file_access task skips over not mentioned folders
 		Given I extend the development capistrano configuration variable default_file_access_owner_of_shared_path with value 'test-user'
 		And I extend the development capistrano configuration variable selected_custom_file_access with value ['another_directory']
 		When I successfully run `cap dev file_access:set_selected_custom_access`
 		Then the output should contain "Skipped setting custom_file_access permissions for 'catalog' because it is not mentioned in selected_custom_file_access!"
-		And the output should not contain "sudo chown -R test-user /var/www/dkdeploy/current/catalog"
+		And the output should not contain "chown -R test-user /var/www/dkdeploy/current/catalog"
 
 	Scenario: Check if the selected_custom_file_access task skips over not existing folders
 		Given I extend the development capistrano configuration variable custom_file_access with value {app: {release_path: {catalog: {mode: 'u+rwx,g+rwx,o-wx'}, not_existing: {mode: 'u+rwx,g+rwx,o-wx'}}}}
 		And I extend the development capistrano configuration variable selected_custom_file_access with value [:not_existing, :catalog]
 		And a remote directory named "releases_path/not_existing" should not exist
 		When I successfully run `cap dev file_access:set_selected_custom_access`
-		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist on host dkdeploy-core.dev"
-		And the output should not contain "sudo chmod -R u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/not_existing"
-		And the output should contain "sudo chmod -R u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/catalog"
+		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist"
+		And the output should not contain "chmod -R u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/not_existing"
+		And the output should contain "chmod -R u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/catalog"
