@@ -13,6 +13,14 @@ module Dkdeploy
       fetch :copy_source, '.'
     end
 
+    # Public path
+    # Path to folder inside copy source that will be publicly exposed.
+    #
+    # @return [String]
+    def public_path
+      release_path.join(fetch(:public_path, ''))
+    end
+
     # Local Dump Path
     #
     # @return [String]

@@ -31,7 +31,15 @@ after 'deploy:symlink:linked_files', 'deploy:enhanced_symlinks:symlink:linked_fi
 namespace :load do
   task :defaults do
     # Set default web root paths
-    set(:local_web_root_path, -> { fetch(:copy_source) })
+
+    set(:local_web_root_path, lambda do
+      public_path = fetch(:public_path, nil)
+      if public_path.nil?
+        fetch(:copy_source)
+      else
+        File.join(fetch(:copy_source), public_path)
+      end
+    end)
     set :remote_web_root_path, '.'
 
     # Set default version file path
