@@ -57,3 +57,11 @@ Feature: Test tasks for error handlers
 		Then I run `cap dev deploy`
 		And the output should not contain "Task 'deploy:symlink:release' executed"
 		And the exit status should not be 0
+
+	Scenario: Rollback execute all tasks
+		Given I successfully run "cap dev deploy"
+		And I provoke an exception for testing purposes after symlinking the new release
+		And I extend the development capistrano configuration from the fixture file second_server.rb
+		Then I run `cap dev deploy`
+		And the output should not contain "Skipping task"
+		And the exit status should not be 0
