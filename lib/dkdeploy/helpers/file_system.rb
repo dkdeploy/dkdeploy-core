@@ -22,9 +22,8 @@ module Dkdeploy
       # @param path [String] path to resolve
       # @return [String]
       def resolve_path_if_symlink(context, path)
-        if context.test " [ -L #{path} ] "
-          return context.capture :readlink, '-f', path
-        end
+        return context.capture :readlink, '-f', path if context.test " [ -L #{path} ] "
+
         path
       end
 
@@ -57,19 +56,13 @@ module Dkdeploy
         resolved_path = resolve_path_if_symlink(context, path)
 
         # change owner if set
-        if access_properties.key?(:owner)
-          context.execute :chown, recursive, access_properties.fetch(:owner), resolved_path
-        end
+        context.execute :chown, recursive, access_properties.fetch(:owner), resolved_path if access_properties.key?(:owner)
 
         # change group if set
-        if access_properties.key?(:group)
-          context.execute :chgrp, recursive, access_properties.fetch(:group), resolved_path
-        end
+        context.execute :chgrp, recursive, access_properties.fetch(:group), resolved_path if access_properties.key?(:group)
 
         # change mode if set
-        if access_properties.key?(:mode) # rubocop:disable Style/GuardClause
-          context.execute :chmod, recursive, access_properties.fetch(:mode), resolved_path
-        end
+        context.execute :chmod, recursive, access_properties.fetch(:mode), resolved_path if access_properties.key?(:mode)
       end
     end
   end

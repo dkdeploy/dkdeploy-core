@@ -26,6 +26,7 @@ module Dkdeploy
         else
           @mysql_error_seen = true if data =~ /.*ERROR.*/i
           return raise 'Unexpected data from stream. Can not send password to undefined stream' unless @mysql_error_seen
+
           # combine the multiple lines from error message. The fact that the error message will be shown multiple times is simply ignored
           @return_message << data
           message = 'Error on executing MySQL command! Response (error code) is: '

@@ -87,7 +87,7 @@ Feature: Test tasks for namespace 'file_permissions'
 		Given I extend the development capistrano configuration variable custom_file_access with value {app: {release_path: {catalog: {mode: 'u+rwx,g+rwx,o-wx'}, not_existing: {mode: 'u+rwx,g+rwx,o-wx'}}}}
 		And a remote directory named "releases_path/not_existing" should not exist
 		When I successfully run `cap dev file_access:set_custom_access`
-		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist on host dkdeploy-core.dev"
+		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist on host dkdeploy-core.test"
 		And the output should not contain "sudo chmod  u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/not_existing"
 		And the output should contain "sudo chmod  u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/catalog"
 
@@ -115,6 +115,6 @@ Feature: Test tasks for namespace 'file_permissions'
 		And I extend the development capistrano configuration variable selected_custom_file_access with value [:not_existing, :catalog]
 		And a remote directory named "releases_path/not_existing" should not exist
 		When I successfully run `cap dev file_access:set_selected_custom_access`
-		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist on host dkdeploy-core.dev"
+		Then the output should contain "The resource /var/www/dkdeploy/current/not_existing does not exist on host dkdeploy-core.test"
 		And the output should not contain "sudo chmod -R u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/not_existing"
 		And the output should contain "sudo chmod -R u+rwx,g+rwx,o-wx /var/www/dkdeploy/current/catalog"

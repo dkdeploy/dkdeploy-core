@@ -68,7 +68,7 @@ rvm (v1.29.x) with installed Ruby 2.2.
 
 Add the virtual box alias to your `hosts` file
 
-	192.168.156.180 dkdeploy-core.dev
+	192.168.156.180 dkdeploy-core.test
 
 ### Running tests
 
@@ -81,11 +81,10 @@ Add the virtual box alias to your `hosts` file
 1. Install [git flow](https://github.com/nvie/gitflow)
 2. Install [Homebrew](http://brew.sh/) and run `brew install mysql`
 3. Install [NodeJS](https://nodejs.org) (supported: v0.12.7) via `brew install nodejs`
-4. Install [Bower](http://bower.io) (supported: v1.7.9) via `npm install -g bower@1.7.9`
-5. If project is not checked out already do git clone `git@github.com:dkdeploy/dkdeploy-core.git`
-6. Checkout origin develop branch (`git checkout --track -b develop origin/develop`)
-7. Git flow initialze `git flow init -d`
-8. Installing gems `bundle install`
-9. Create new feature branch (`git flow feature start my-new-feature`)
-10. Run tests (README.md Testing)
-11. Commit your changes (`git commit -am 'Add some feature'`)
+4. If project is not checked out already do git clone `git@github.com:dkdeploy/dkdeploy-core.git`
+5. Checkout origin develop branch (`git checkout --track -b develop origin/develop`)
+6. Git flow initialze `git flow init -d`
+7. Installing gems `bundle install`
+8. Create new feature branch (`git flow feature start my-new-feature`)
+9. Run tests (README.md Testing)
+10. Commit your changes (`git commit -am 'Add some feature'`)

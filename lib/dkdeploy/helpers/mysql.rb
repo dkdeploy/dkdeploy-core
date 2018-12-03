@@ -9,6 +9,7 @@ module Dkdeploy
       # @return [Boolean]
       def slow_log_exists?(file_path)
         return true if !file_path.empty? && test("[ -f #{file_path} ]")
+
         error I18n.t('file.not_exists_or_not_accessible_on_host', file: file_path, host: server, scope: :dkdeploy)
         false
       end

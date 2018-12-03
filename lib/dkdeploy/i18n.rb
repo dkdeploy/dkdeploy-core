@@ -42,11 +42,6 @@ en = {
       charset: 'Please enter the database character set',
       zipped_db_file: 'Please enter the name of the zipped SQL script file'
     },
-    bower: {
-      command: 'Please enter the command you want to run',
-      path: 'Please enter the path to the bower.json file',
-      paths: 'Please enter the paths bower.json files (separated by spaces)'
-    },
     selected_custom_file_access: {
       paths: 'Please enter a list of paths (entries separated by spaces)'
     },
@@ -94,10 +89,6 @@ en = {
       upload_extract: 'Extracting %{file}',
       exclude_file_not_found: "No exclude file found. To use set variable 'assets_exclude_file'"
     },
-    bower: {
-      skipping_missing_directory: 'Skipping directory %{bower_path} because it does not exist.',
-      skipping_directory_with_missing_bower_file: 'Skipping directory %{bower_path} because it does not contain a bower.json file.'
-    },
     copy: {
       archive: {
         generate: 'Generating the tar archive.',
@@ -144,6 +135,4 @@ capistrano_i18n_overwritten = {
 I18n.backend.store_translations(:en, dkdeploy: en)
 I18n.backend.store_translations(:en, capistrano: capistrano_i18n_overwritten)
 
-if I18n.respond_to?(:enforce_available_locales=)
-  I18n.enforce_available_locales = true
-end
+I18n.enforce_available_locales = true if I18n.respond_to?(:enforce_available_locales=)

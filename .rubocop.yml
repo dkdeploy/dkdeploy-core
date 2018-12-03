@@ -25,3 +25,5 @@ Metrics/BlockLength:
   Enabled: false
 Style/FormatStringToken:
   Enabled: false
+Style/MixinUsage:
+  Enabled: false

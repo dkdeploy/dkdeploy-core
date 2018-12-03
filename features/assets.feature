@@ -37,7 +37,6 @@ Feature: Test tasks for namespace 'assets'
 		And I run `cap dev assets:add_htpasswd` interactively
 		And I type "dkd_test_user"
 		And I type "dkd_test_password"
-		And I close the stdin stream
 		Then the exit status should be 0
 		And a remote file named "shared_path/.htpasswd" should exist
 
