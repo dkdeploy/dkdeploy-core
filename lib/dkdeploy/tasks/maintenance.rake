@@ -55,7 +55,7 @@ namespace :maintenance do
             next
           end
         end
-        execute :rm, '-f', maintenance_config_file_path
+        execute :rm, maintenance_config_file_path
       end
       info I18n.t('tasks.maintenance.disabled', mode: 'regular', scope: :dkdeploy)
     end
@@ -64,7 +64,7 @@ namespace :maintenance do
   desc "Disables the maintenance permanent mode. The 'maintenance:disable' will work in a regular way again."
   task :disable_permanent do
     on release_roles :app, :web do
-      execute :rm, '-f', maintenance_config_file_path
+      execute :rm, maintenance_config_file_path
       info I18n.t('tasks.maintenance.disabled', mode: 'permanent', scope: :dkdeploy)
     end
   end
