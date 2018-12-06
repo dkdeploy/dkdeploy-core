@@ -2,7 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [9.2.0]
+## [9.2.1] - 2019-12-06
+### Summary
+
+- removed loading of pry
+
+## [9.2.0] - 2019-12-06 [YANKED]
 ### Summary
 
 - supports Ruby 2.5
@@ -11,14 +16,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - we no longer remove maintenance_config_file_path forcefully to make failures more apparent
 - improved shell independence
 
-## [9.1.0]
+## [9.1.0] - 2018-02-09
 ### Summary
 
 - Use correct capistrano context at copy scm
 - Update capistrano 3.10.1
 - Always execute tasks for each server or at rollback
 
-## [9.0.0]
+## [9.0.0] 2017-10-16
 ### Summary
 
 - tasks around MySQL slow log
@@ -49,6 +54,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - first public release
 
 [Unreleased]: https://github.com/dkdeploy/dkdeploy-core/compare/master...develop
+[9.2.1]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.2.1
 [9.2.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.2.0
 [9.1.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.1.0
 [9.0.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.0.0
