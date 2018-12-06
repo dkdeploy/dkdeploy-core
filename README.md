@@ -66,13 +66,9 @@ The complete list of the dkdeploy constants you find in `/lib/capistrano/dkdeplo
 
 rvm (v1.29.x) with installed Ruby 2.2.
 
-Add the virtual box alias to your `hosts` file
-
-	192.168.156.180 dkdeploy-core.test
-
 ### Running tests
 
-1. Starting the local box (`vagrant up --provision`)
+1. Starting the local docker (`docker-compose up -d`)
 2. Checking coding styles (`rubocop`)
 3. Running BDD cucumber tests (`cucumber`)
 
