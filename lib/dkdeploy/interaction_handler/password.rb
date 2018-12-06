@@ -1,5 +1,3 @@
-require 'pry'
-
 module Dkdeploy
   module InteractionHandler
     # Interaction handler for password
