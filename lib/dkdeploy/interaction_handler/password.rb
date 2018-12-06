@@ -1,3 +1,5 @@
+require 'pry'
+
 module Dkdeploy
   module InteractionHandler
     # Interaction handler for password
@@ -20,7 +22,7 @@ module Dkdeploy
           channel.send_data("#{@password}\n")
         else
           channel.close
-          raise 'Unexpected data from stream. Can not send password to undefined stream'
+          raise 'Unexpected data from stream. Can not send password to undefined stream.'
         end
       end
     end

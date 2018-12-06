@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [9.2.0]
+### Summary
+
+- supports Ruby 2.5
+- removes Bower support
+- moved test infrastructure to Ubuntu Xenial
+- we no longer remove maintenance_config_file_path forcefully to make failures more apparent
+- improved shell independence
+
 ## [9.1.0]
 ### Summary
 
@@ -40,6 +49,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - first public release
 
 [Unreleased]: https://github.com/dkdeploy/dkdeploy-core/compare/master...develop
+[9.2.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.2.0
 [9.1.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.1.0
 [9.0.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.0.0
 [8.0.1]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v8.0.1

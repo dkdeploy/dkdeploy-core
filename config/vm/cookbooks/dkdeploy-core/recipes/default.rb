@@ -19,17 +19,16 @@ end
 
 mysql_service 'default' do
   port '3306'
-  # Need for remote connection
-  bind_address '0.0.0.0'
-  action [:create, :start]
+  bind_address '0.0.0.0' # Need for remote connection
+  initial_root_password 'ilikerandompasswords'
   run_group 'vagrant'
   run_user 'vagrant'
+  action [:create, :start]
 end
 
 mysql_config 'default' do
   instance 'default' # necessary in some cases, causes hanging on provisioning https://github.com/chef-cookbooks/mysql/issues/387
-  # use different user to allow capistrano access to log file
-  owner 'vagrant'
+  owner 'vagrant' # use different user to allow capistrano access to log file
   group 'vagrant'
   source 'my_extra_settings.erb'
   notifies :restart, 'mysql_service[default]'
@@ -41,23 +40,22 @@ mysql2_chef_gem 'default' do
 end
 
 mysql_connection_info = {
-  :host     => '127.0.0.1',
-  :username => 'root',
-  :password => 'ilikerandompasswords'
+  host: '127.0.0.1',
+  username: 'root',
+  password: 'ilikerandompasswords'
 }
 
 mysql_database 'dkdeploy_core' do
   connection mysql_connection_info
-  action   :create
+  action :create
 end
 
 mysql_database_user 'root' do
   connection mysql_connection_info
-  host       '%'
-  password   'ilikerandompasswords'
-  action     :create
+  host '%'
+  password 'ilikerandompasswords'
   privileges [:all]
-  action     :grant
+  action [:create, :grant]
 end
 
 directory '/var/www' do

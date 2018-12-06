@@ -25,7 +25,7 @@ module Dkdeploy
           'Thumbs.db',
           'composer.lock'
         ]
-        set_if_empty :copy_archive_filename, -> { Dir::Tmpname.make_tmpname([fetch(:application) + '_', '.tar.gz'], nil) }
+        set_if_empty :copy_archive_filename, -> { [fetch(:application), rand(0x100000000).to_s(36)].join('_') + '.tar.gz' }
         set_if_empty :copy_local_tmp_dir, Dir.mktmpdir
       end
 
@@ -38,7 +38,7 @@ module Dkdeploy
       def define_tasks
         # Don not use method "eval_rakefile" to load rake tasks.
         # "eval_rakefile" defined wrong context and use sskit dsl api instead of capistrano dsl.
-        load File.expand_path('../copy.rake', __FILE__)
+        load File.expand_path('copy.rake', __dir__)
       end
     end
   end

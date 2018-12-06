@@ -28,10 +28,10 @@ Feature: Test tasks for namespace 'utils'
 Remote file content
 		"""
 		When I successfully run `cap dev utils:download_file['download_file.txt']`
-		Then a file named "temp/download_file.dkdeploy-core.dev.txt" should exist
+		Then a file named "temp/download_file.dkdeploy-core.test.txt" should exist
 
 	Scenario: Download a file from server which does exist locally
-		Given a file named "temp/download_file.dkdeploy-core.dev.txt" with:
+		Given a file named "temp/download_file.dkdeploy-core.test.txt" with:
 		"""
 Local file content
 		"""
@@ -41,7 +41,7 @@ Local file content
 Remote file content
 		"""
 		When I successfully run `cap dev utils:download_file['download_file.txt']`
-		Then the file "temp/download_file.dkdeploy-core.dev.txt" should contain exactly:
+		Then the file "temp/download_file.dkdeploy-core.test.txt" should contain exactly:
 		"""
 Remote file content
 

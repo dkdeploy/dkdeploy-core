@@ -5,15 +5,15 @@ unless Vagrant.has_plugin?('vagrant-berkshelf')
   abort
 end
 
-Vagrant.require_version '~> 2.0.0'
-chef_version = '12.9.41'
+Vagrant.require_version '~> 2.0'
 
 Vagrant.configure(2) do |config|
-  domain = 'dkdeploy-core.dev'
+  chef_version = '13.6.4'
+  domain = 'dkdeploy-core.test'
   ip_address = '192.168.156.180'
 
   # Search boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = 'ubuntu/trusty64'
+  config.vm.box = 'bento/ubuntu-16.04'
   config.vm.box_check_update = false
   config.berkshelf.enabled = true
 
@@ -25,7 +25,7 @@ Vagrant.configure(2) do |config|
       chef.install = true
       chef.channel = 'stable'
       chef.version = chef_version
-      chef.log_level = :info
+      chef.log_level = :warn
       chef.add_recipe 'dkdeploy-core'
     end
 
@@ -37,7 +37,8 @@ Vagrant.configure(2) do |config|
                               'modifyvm', :id,
                               '--natdnsproxy1', 'off',
                               '--natdnshostresolver1', 'on',
-                              '--memory', '1024'
+                              '--memory', '1024',
+                              '--audio', 'none'
                            ]
     end
   end

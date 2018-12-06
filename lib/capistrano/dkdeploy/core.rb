@@ -7,19 +7,18 @@ require 'dkdeploy/scm/copy'
 install_plugin Dkdeploy::SCM::Copy
 
 # Load dkdeploy tasks
-load File.expand_path('../../../dkdeploy/tasks/deploy.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/fail.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/maintenance.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/utils.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/file_access.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/assets.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/apache.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/project_version.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/db.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/enhanced_symlinks.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/current_folder.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/bower.rake', __FILE__)
-load File.expand_path('../../../dkdeploy/tasks/mysql.rake', __FILE__)
+load File.expand_path('../../dkdeploy/tasks/deploy.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/fail.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/maintenance.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/utils.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/file_access.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/assets.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/apache.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/project_version.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/db.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/enhanced_symlinks.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/current_folder.rake', __dir__)
+load File.expand_path('../../dkdeploy/tasks/mysql.rake', __dir__)
 
 # Hook into symlink related tasks
 after 'deploy:check:linked_dirs', 'deploy:enhanced_symlinks:check:linked_dirs'
@@ -55,10 +54,6 @@ namespace :load do
 
     # Number of archives to keep around
     set :keep_rollback_archives, 5
-
-    # List of bower.json files
-    set(:bower_path, -> { fetch(:copy_source) })
-    set(:bower_paths, -> { Array(fetch(:copy_source)) })
 
     # List of filters for file_access:set_selected_custom_access
     set :selected_custom_file_access, []

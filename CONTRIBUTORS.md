@@ -7,11 +7,13 @@ The dkdeploy core maintainers would like to recognize following contributors (in
 - Sascha Egerer
 - Christoph Gerold
 - Johannes Goslar
+- Kai Harder
 - Kieran Hayes
 - Wilfried Irßlinger
 - Thomas Jahnke
 - Gleb Levitin
 - Luka Lüdicke
+- Minh-Thien Nhan
 - Nicolai Reuschling
 - Lars Tode
 - Timo Webler

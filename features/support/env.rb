@@ -11,8 +11,8 @@ unless ssh_key_files.empty?
   }
 end
 
-TEST_APPLICATION = Dkdeploy::TestEnvironment::Application.new(File.expand_path('../../../', __FILE__), 'dkdeploy-core.dev', ssh_config)
-TEST_APPLICATION.mysql_connection_settings = { host: 'dkdeploy-core.dev', username: 'root', password: 'ilikerandompasswords' }
+TEST_APPLICATION = Dkdeploy::TestEnvironment::Application.new(File.expand_path('../..', __dir__), 'dkdeploy-core.test', ssh_config)
+TEST_APPLICATION.mysql_connection_settings = { host: 'dkdeploy-core.test', username: 'root', password: 'ilikerandompasswords' }
 
 # this configuration tricks Bundler into executing another Bundler project with clean enviroment
 # The official way via Bundler.with_clean_env did not work properly here
