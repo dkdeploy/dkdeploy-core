@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :deploy_to, '/var/www/dkdeploy'
 server 'dkdeploy-core.test', roles: %w[web app backend db], primary: true
 

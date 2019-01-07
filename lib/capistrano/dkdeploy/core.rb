@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include Capistrano::DSL
 
 require 'dkdeploy/rollback_manager'

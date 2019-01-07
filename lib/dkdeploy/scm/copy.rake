@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :copy do
   desc 'Check if all configuration variables and copy sources exist'
   task :check do

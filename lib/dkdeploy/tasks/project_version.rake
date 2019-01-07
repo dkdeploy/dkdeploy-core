@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'capistrano/i18n'
 require 'dkdeploy/i18n'
 require 'dkdeploy/constants'

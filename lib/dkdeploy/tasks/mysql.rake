@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dkdeploy/constants'
 require 'dkdeploy/helpers/common'
 require 'dkdeploy/helpers/mysql'

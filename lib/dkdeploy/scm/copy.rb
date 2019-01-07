@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tmpdir'
 require 'capistrano/scm/plugin'
 require 'capistrano/i18n'
