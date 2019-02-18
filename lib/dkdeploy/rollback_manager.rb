@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Dkdeploy
   # The RollbackManager module is a mixin for managing rollback tasks.
   module RollbackManager

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Dkdeploy
   module Core
     # Class for version number
@@ -5,7 +7,7 @@ module Dkdeploy
     class Version
       MAJOR = 9
       MINOR = 2
-      PATCH = 1
+      PATCH = 2
 
       def self.to_s
         [MAJOR, MINOR, PATCH].join('.')

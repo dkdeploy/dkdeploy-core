@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dkdeploy/test_environment/application'
 
 ssh_config = {}

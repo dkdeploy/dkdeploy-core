@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # custom file access properties
 set :custom_file_access, {
   app: {

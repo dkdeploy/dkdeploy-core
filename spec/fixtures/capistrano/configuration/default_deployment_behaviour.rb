@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Deploy workflow. See http://capistranorb.com/documentation/getting-started/flow/
 after 'deploy:started', 'apache:htaccess'
 after 'deploy:started', 'assets:compile_compass'

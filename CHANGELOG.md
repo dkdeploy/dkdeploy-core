@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [9.2.2] - 2019-02-18
+
+- run tests and linter against Ruby 2.3
+- fixed bug in clean_up_temporary_sources 
+
 ## [9.2.1] - 2019-12-06
 ### Summary
 
@@ -54,6 +59,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - first public release
 
 [Unreleased]: https://github.com/dkdeploy/dkdeploy-core/compare/master...develop
+[9.2.2]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.2.2
 [9.2.1]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.2.1
 [9.2.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.2.0
 [9.1.0]: https://github.com/dkdeploy/dkdeploy-core/releases/tag/v9.1.0

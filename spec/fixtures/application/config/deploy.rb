@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :application, 'test_app'
 
 SSHKit.config.command_map.prefix[:compass].push 'bundle exec'
