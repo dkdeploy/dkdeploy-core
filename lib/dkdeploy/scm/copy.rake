@@ -64,7 +64,7 @@ namespace :copy do
     # removes the remote temp path including the uploaded archive
     on release_roles :all do
       info I18n.t('file.remove', path: remote_archive_path, scope: :dkdeploy)
-      execute :rm, '-rf', remote_tmp_dir
+      execute :rm, '-rf', remote_archive_path
     end
   end
 
