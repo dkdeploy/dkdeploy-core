@@ -146,7 +146,7 @@ namespace :db do
         execute :rm, '-f', remote_zipped_dump_file
 
         ignore_tables_command_line = ignore_tables.inject('') do |command_line, table|
-          command_line << " --ignore-table=#{db_settings.fetch('name')}.#{table}"
+          command_line + " --ignore-table=#{db_settings.fetch('name')}.#{table}"
         end
 
         execute :mysqldump,

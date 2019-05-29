@@ -2,7 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [9.2.3] - 2019-05-29
+### Summary
+
+- Remove frozen string error
+- Update interaction handler for new `htpasswd` versions
+- Use correct test statement for task "remove_unless_symlinked"
+
 ## [9.2.2] - 2019-02-18
+### Summary
 
 - run tests and linter against Ruby 2.3
 - fixed bug in clean_up_temporary_sources 
