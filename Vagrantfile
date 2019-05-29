@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
   if Vagrant.has_plugin?('landrush')
     config.landrush.enabled = true
     config.landrush.guest_redirect_dns = false
-    config.landrush.tld = 'dev'
+    config.landrush.tld = 'test'
     config.landrush.host domain, ip_address
   else
     config.vm.post_up_message = "Either install Vagrant plugin 'landrush' or add this entry to your host file: #{ip_address} #{domain}"
