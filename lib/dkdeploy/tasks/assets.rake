@@ -46,7 +46,7 @@ namespace :assets do
     on release_roles :web do
       info I18n.t('directory.create', scope: :dkdeploy)
       execute :mkdir, '-p', shared_path
-      execute :htpasswd, '-c', htpasswd_path, username, interaction_handler: Dkdeploy::InteractionHandler::Password.new(password)
+      execute :htpasswd, '-c', htpasswd_path, username, interaction_handler: {/.*password.*/i => "#{password}\n"}
       info I18n.t('tasks.assets.add_htpasswd.successfully_created', scope: :dkdeploy)
     end
   end
