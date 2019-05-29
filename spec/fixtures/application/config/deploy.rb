@@ -18,6 +18,8 @@ set :asset_default_content, %w[download]
 set :asset_exclude_file, 'config/assets_exclude_file.txt'
 set :asset_folders, %w[download]
 
+set :additional_ignore_tables, %w[test_table]
+
 require 'dkdeploy/interaction_handler/mysql'
 namespace :db do
   task :sql_error do
