@@ -30,6 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.5'
   spec.add_development_dependency 'rubocop', '~> 0.62.0'
 
-  spec.add_dependency 'capistrano', '~> 3.11.0'
-  spec.add_dependency 'highline', '~> 1.7.1'
+  spec.add_dependency 'capistrano', '~> 3.14.1'
+  spec.add_dependency 'highline', '~> 2.0.3'
 end
