@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)\/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'aruba', '~> 1.0'
+  spec.add_development_dependency 'aruba', '~> 0.14.1'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'cucumber', '~> 2.4'
   spec.add_development_dependency 'dkdeploy-test_environment', '~> 2.0'
