@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Update gem `capistrano` to 3.14.x
 - Update gem `highline` to 2.0.x
+- Test ruby 2.7 via travis
 
 ## [9.2.3] - 2019-05-29
 ### Summary
