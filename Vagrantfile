@@ -19,6 +19,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define('dkdeploy-core', primary: true) do |master_config|
     master_config.vm.network 'private_network', ip: ip_address
+    master_config.vm.hostname = domain
 
     # Chef settings
     master_config.vm.provision :chef_solo do |chef|
@@ -43,12 +44,10 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  if Vagrant.has_plugin?('landrush')
-    config.landrush.enabled = true
-    config.landrush.guest_redirect_dns = false
-    config.landrush.tld = 'test'
-    config.landrush.host domain, ip_address
-  else
-    config.vm.post_up_message = "Either install Vagrant plugin 'landrush' or add this entry to your host file: #{ip_address} #{domain}"
+  unless Vagrant.has_plugin?('vagrant-hostsupdater')
+    master_config.vm.post_up_message = <<-HEREDOC
+        Add following entries to your host file or install vagrant plugin vagrant-hostsupdater ("vagrant plugin install vagrant-hostsupdater") and restart virtual box
+          #{ip_address} #{domain}
+    HEREDOC
   end
 end
