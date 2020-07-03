@@ -64,7 +64,7 @@ The complete list of the dkdeploy constants you find in `/lib/capistrano/dkdeplo
 
 ### Prerequisite
 
-rvm (v1.29.x) with installed Ruby 2.2.
+rvm (v1.29.x) with installed Ruby 2.2 or newer.
 
 Add the virtual box alias to your `hosts` file
 
@@ -74,7 +74,7 @@ Add the virtual box alias to your `hosts` file
 
 1. Starting the local box (`vagrant up --provision`)
 2. Checking coding styles (`rubocop`)
-3. Running BDD cucumber tests (`cucumber`)
+3. Running BDD cucumber tests (`BUNDLER_VERSION=2.1.4 cucumber`)
 
 ## Contributing
 
@@ -84,7 +84,7 @@ Add the virtual box alias to your `hosts` file
 4. If project is not checked out already do git clone `git@github.com:dkdeploy/dkdeploy-core.git`
 5. Checkout origin develop branch (`git checkout --track -b develop origin/develop`)
 6. Git flow initialze `git flow init -d`
-7. Installing gems `bundle install`
+7. Installing gems `BUNDLER_VERSION=1.17.3 bundle install`
 8. Create new feature branch (`git flow feature start my-new-feature`)
 9. Run tests (README.md Testing)
 10. Commit your changes (`git commit -am 'Add some feature'`)
