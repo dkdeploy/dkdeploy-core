@@ -42,12 +42,12 @@ Vagrant.configure(2) do |config|
                               '--audio', 'none'
                            ]
     end
-  end
 
-  unless Vagrant.has_plugin?('vagrant-hostsupdater')
-    master_config.vm.post_up_message = <<-HEREDOC
-        Add following entries to your host file or install vagrant plugin vagrant-hostsupdater ("vagrant plugin install vagrant-hostsupdater") and restart virtual box
-          #{ip_address} #{domain}
-    HEREDOC
+    unless Vagrant.has_plugin?('vagrant-hostsupdater')
+      master_config.vm.post_up_message = <<-HEREDOC
+          Add following entries to your host file or install vagrant plugin vagrant-hostsupdater ("vagrant plugin install vagrant-hostsupdater") and restart virtual box
+            #{ip_address} #{domain}
+      HEREDOC
+    end
   end
 end

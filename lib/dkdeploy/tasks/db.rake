@@ -82,23 +82,21 @@ namespace :db do
     end
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_zipped_file_name
-        execute :rm, '-f', remote_file_name
-        upload! local_zipped_file_name, remote_zipped_file_name, via: :scp
-        execute :gunzip, remote_zipped_file_name
-        execute :mysql,
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
-                '-e', "'source #{remote_file_name}'",
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-      ensure
-        execute :rm, '-f', remote_zipped_file_name
-        execute :rm, '-f', remote_file_name
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_zipped_file_name
+      execute :rm, '-f', remote_file_name
+      upload! local_zipped_file_name, remote_zipped_file_name, via: :scp
+      execute :gunzip, remote_zipped_file_name
+      execute :mysql,
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
+              '-e', "'source #{remote_file_name}'",
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+    ensure
+      execute :rm, '-f', remote_zipped_file_name
+      execute :rm, '-f', remote_file_name
     end
   end
 
@@ -112,24 +110,22 @@ namespace :db do
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_dump_file
-        execute :rm, '-f', remote_zipped_dump_file
-        execute :mysqldump,
-                '--no-data', '--skip-set-charset',
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
-                '>', remote_dump_file,
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-        execute :gzip, remote_dump_file
-        download! remote_zipped_dump_file, 'temp', via: :scp
-      ensure
-        execute :rm, '-f', remote_dump_file
-        execute :rm, '-f', remote_zipped_dump_file
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_dump_file
+      execute :rm, '-f', remote_zipped_dump_file
+      execute :mysqldump,
+              '--no-data', '--skip-set-charset',
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
+              '>', remote_dump_file,
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+      execute :gzip, remote_dump_file
+      download! remote_zipped_dump_file, 'temp', via: :scp
+    ensure
+      execute :rm, '-f', remote_dump_file
+      execute :rm, '-f', remote_zipped_dump_file
     end
   end
 
@@ -140,29 +136,27 @@ namespace :db do
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_dump_file
-        execute :rm, '-f', remote_zipped_dump_file
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_dump_file
+      execute :rm, '-f', remote_zipped_dump_file
 
-        ignore_tables_command_line = ignore_tables.inject('') do |command_line, table|
-          command_line + " --ignore-table=#{db_settings.fetch('name')}.#{table}"
-        end
-
-        execute :mysqldump,
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '--skip-set-charset',
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), ignore_tables_command_line, db_settings.fetch('name'),
-                '>', remote_dump_file,
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-        execute :gzip, remote_dump_file
-        download! remote_zipped_dump_file, 'temp', via: :scp
-      ensure
-        execute :rm, '-f', remote_dump_file
-        execute :rm, '-f', remote_zipped_dump_file
+      ignore_tables_command_line = ignore_tables.inject('') do |command_line, table|
+        command_line + " --ignore-table=#{db_settings.fetch('name')}.#{table}"
       end
+
+      execute :mysqldump,
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '--skip-set-charset',
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), ignore_tables_command_line, db_settings.fetch('name'),
+              '>', remote_dump_file,
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+      execute :gzip, remote_dump_file
+      download! remote_zipped_dump_file, 'temp', via: :scp
+    ensure
+      execute :rm, '-f', remote_dump_file
+      execute :rm, '-f', remote_zipped_dump_file
     end
   end
 
@@ -176,24 +170,22 @@ namespace :db do
     remote_zipped_dump_file = "#{remote_dump_file}.gz"
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_dump_file
-        execute :rm, '-f', remote_zipped_dump_file
-        execute :mysqldump,
-                '--no-data', '--skip-set-charset',
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'), table_name,
-                '>', remote_dump_file,
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-        execute :gzip, remote_dump_file
-        download! remote_zipped_dump_file, zipped_dump_file, via: :scp
-      ensure
-        execute :rm, '-f', remote_dump_file
-        execute :rm, '-f', remote_zipped_dump_file
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_dump_file
+      execute :rm, '-f', remote_zipped_dump_file
+      execute :mysqldump,
+              '--no-data', '--skip-set-charset',
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'), table_name,
+              '>', remote_dump_file,
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+      execute :gzip, remote_dump_file
+      download! remote_zipped_dump_file, zipped_dump_file, via: :scp
+    ensure
+      execute :rm, '-f', remote_dump_file
+      execute :rm, '-f', remote_zipped_dump_file
     end
   end
 
@@ -211,27 +203,25 @@ namespace :db do
     FileUtils.mkdir_p file_path
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_file_name
-        execute :rm, '-f', remote_zipped_file
-        execute :mysqldump,
-                '--no-data', '--skip-set-charset',
-                '--no-create-info', '--skip-comments',
-                '--skip-extended-insert', '--skip-set-charset',
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
-                db_settings.fetch('name'), table_names.join(' '),
-                '>', remote_file_name,
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-        execute :gzip, remote_file_name
-        download! remote_zipped_file, local_zipped_file, via: :scp
-      ensure
-        execute :rm, '-f', remote_file_name
-        execute :rm, '-f', remote_zipped_file
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_file_name
+      execute :rm, '-f', remote_zipped_file
+      execute :mysqldump,
+              '--no-data', '--skip-set-charset',
+              '--no-create-info', '--skip-comments',
+              '--skip-extended-insert', '--skip-set-charset',
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
+              db_settings.fetch('name'), table_names.join(' '),
+              '>', remote_file_name,
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+      execute :gzip, remote_file_name
+      download! remote_zipped_file, local_zipped_file, via: :scp
+    ensure
+      execute :rm, '-f', remote_file_name
+      execute :rm, '-f', remote_zipped_file
     end
 
     run_locally do
@@ -246,23 +236,21 @@ namespace :db do
     remote_zipped_default_content_file = "#{remote_default_content_file}.gz"
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_default_content_file
-        execute :rm, '-f', remote_zipped_default_content_file
-        upload! local_zipped_default_content_file, remote_zipped_default_content_file, via: :scp
-        execute :gunzip, remote_zipped_default_content_file
-        execute :mysql,
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
-                '-e', "'source #{remote_default_content_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-      ensure
-        execute :rm, '-f', remote_default_content_file
-        execute :rm, '-f', remote_zipped_default_content_file
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_default_content_file
+      execute :rm, '-f', remote_zipped_default_content_file
+      upload! local_zipped_default_content_file, remote_zipped_default_content_file, via: :scp
+      execute :gunzip, remote_zipped_default_content_file
+      execute :mysql,
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
+              '-e', "'source #{remote_default_content_file}'",
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+    ensure
+      execute :rm, '-f', remote_default_content_file
+      execute :rm, '-f', remote_zipped_default_content_file
     end
   end
 
@@ -273,22 +261,20 @@ namespace :db do
     remote_zipped_default_structure_file = "#{remote_default_structure_file}.gz"
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_default_structure_file
-        execute :rm, '-f', remote_zipped_default_structure_file
-        upload! local_zipped_default_structure_file, remote_zipped_default_structure_file, via: :scp
-        execute :gunzip, remote_zipped_default_structure_file
-        execute :mysql,
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '-u', db_settings.fetch('username'), '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
-                '-e', "'source #{remote_default_structure_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-      ensure
-        execute :rm, '-f', remote_default_structure_file
-        execute :rm, '-f', remote_zipped_default_structure_file
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_default_structure_file
+      execute :rm, '-f', remote_zipped_default_structure_file
+      upload! local_zipped_default_structure_file, remote_zipped_default_structure_file, via: :scp
+      execute :gunzip, remote_zipped_default_structure_file
+      execute :mysql,
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '-u', db_settings.fetch('username'), '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), db_settings.fetch('name'),
+              '-e', "'source #{remote_default_structure_file}'",
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+    ensure
+      execute :rm, '-f', remote_default_structure_file
+      execute :rm, '-f', remote_zipped_default_structure_file
     end
   end
 
@@ -307,27 +293,25 @@ namespace :db do
     local_zipped_file = "#{local_file_name}.gz"
 
     on primary :backend do
-      begin
-        db_settings = read_db_settings_for_context(self)
-        execute :rm, '-f', remote_file_name
-        execute :rm, '-f', remote_zipped_file
-        execute :mysqldump,
-                "--default-character-set=#{db_settings.fetch('charset')}",
-                '--no-create-info', '--skip-comments',
-                '--skip-extended-insert', '--skip-set-charset',
-                '--complete-insert',
-                '-u', db_settings.fetch('username'),
-                '-p',
-                '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
-                db_settings.fetch('name'), table_names,
-                '>', remote_file_name,
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
-        execute :gzip, remote_file_name
-        download! remote_zipped_file, local_zipped_file, via: :scp
-      ensure
-        execute :rm, '-f', remote_file_name
-        execute :rm, '-f', remote_zipped_file
-      end
+      db_settings = read_db_settings_for_context(self)
+      execute :rm, '-f', remote_file_name
+      execute :rm, '-f', remote_zipped_file
+      execute :mysqldump,
+              "--default-character-set=#{db_settings.fetch('charset')}",
+              '--no-create-info', '--skip-comments',
+              '--skip-extended-insert', '--skip-set-charset',
+              '--complete-insert',
+              '-u', db_settings.fetch('username'),
+              '-p',
+              '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
+              db_settings.fetch('name'), table_names,
+              '>', remote_file_name,
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
+      execute :gzip, remote_file_name
+      download! remote_zipped_file, local_zipped_file, via: :scp
+    ensure
+      execute :rm, '-f', remote_file_name
+      execute :rm, '-f', remote_zipped_file
     end
 
     run_locally do
@@ -392,14 +376,14 @@ namespace :db do
                 '-e', "'source #{remote_dump_file}'",
                 interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch('password'))
       end
-    rescue SSHKit::Command::Failed => exception
+    rescue SSHKit::Command::Failed => e
       run_locally do
         error "Removing #{remote_dump_file} and #{remote_dump_md5_file}"
         execute :rm, '-f', remote_dump_md5_file
         execute :rm, '-f', remote_dump_file
       end
       task.reenable
-      raise "upload_tables failed: #{exception.message}"
+      raise "upload_tables failed: #{e.message}"
     end
   end
 end
