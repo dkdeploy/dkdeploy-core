@@ -31,29 +31,27 @@ namespace :db do
     sql_string = StringIO.new "INSERT INTO be_users (username, password, admin, tstamp, crdate)
                                 VALUES ('#{username}', MD5('#{password}'), 1, #{now}, #{now});"
     on primary :backend do
-      begin
-        db_settings = {
-          charset: 'utf8',
-          username: 'root',
-          password: 'ilikerandompasswords',
-          host: '127.0.0.1',
-          port: 3306,
-          name: 'dkdeploy_core'
-        }
-        execute :mkdir, '-p', remote_db_file_path
-        execute :rm, '-rf', remote_db_file
+      db_settings = {
+        charset: 'utf8',
+        username: 'root',
+        password: 'ilikerandompasswords',
+        host: '127.0.0.1',
+        port: 3306,
+        name: 'dkdeploy_core'
+      }
+      execute :mkdir, '-p', remote_db_file_path
+      execute :rm, '-rf', remote_db_file
 
-        upload! sql_string, remote_db_file
-        execute :mysql,
-                "--default-character-set=#{db_settings.fetch(:charset)}",
-                '-u', db_settings.fetch(:username),
-                '-p',
-                '-h', db_settings.fetch(:host), '-P', db_settings.fetch(:port), db_settings.fetch(:name),
-                '-e', "'source #{remote_db_file}'",
-                interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch(:password))
-      ensure
-        execute :rm, '-rf', remote_db_file
-      end
+      upload! sql_string, remote_db_file
+      execute :mysql,
+              "--default-character-set=#{db_settings.fetch(:charset)}",
+              '-u', db_settings.fetch(:username),
+              '-p',
+              '-h', db_settings.fetch(:host), '-P', db_settings.fetch(:port), db_settings.fetch(:name),
+              '-e', "'source #{remote_db_file}'",
+              interaction_handler: Dkdeploy::InteractionHandler::MySql.new(db_settings.fetch(:password))
+    ensure
+      execute :rm, '-rf', remote_db_file
     end
   end
 end

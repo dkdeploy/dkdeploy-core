@@ -5,21 +5,19 @@ AllCops:
     - 'config/**/*'
     - 'Vagrantfile'
     - 'vendor/**/*'
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
   ExtraDetails: true
   DisplayStyleGuide: true
   DisplayCopNames: true
-GlobalVars:
+Style/GlobalVars:
   AllowedVariables: []
-MethodLength:
+Metrics/MethodLength:
   Max: 25
-LineLength:
+Layout/LineLength:
   Max: 200
-SpecialGlobalVars:
+Style/SpecialGlobalVars:
   Enabled: false
-BracesAroundHashParameters:
-  Enabled: false
-CyclomaticComplexity:
+Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/BlockLength:
   Enabled: false
@@ -27,3 +25,31 @@ Style/FormatStringToken:
   Enabled: false
 Style/MixinUsage:
   Enabled: false
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/RedundantFetchBlock:
+  Enabled: true
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: true
