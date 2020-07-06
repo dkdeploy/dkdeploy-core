@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [9.3.0] - 2020-07-06
+### Summary
+
+- Update gem `capistrano` to 3.14.x
+- Update gem `highline` to 2.0.x
+- Test ruby 2.7 via travis
+
 ## [9.2.3] - 2019-05-29
 ### Summary
 
