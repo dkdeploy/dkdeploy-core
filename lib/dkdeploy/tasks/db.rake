@@ -115,7 +115,7 @@ namespace :db do
         execute :rm, '-f', remote_dump_file
         execute :rm, '-f', remote_zipped_dump_file
         execute :mysqldump,
-                '--no-data', '--skip-set-charset',
+                '--no-data', '--skip-set-charset', '--no-tablespaces',
                 "--default-character-set=#{db_settings.fetch('charset')}",
                 '-u', db_settings.fetch('username'),
                 '-p',
@@ -150,6 +150,7 @@ namespace :db do
         execute :mysqldump,
                 "--default-character-set=#{db_settings.fetch('charset')}",
                 '--skip-set-charset',
+                '--no-tablespaces',
                 '-u', db_settings.fetch('username'),
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'), ignore_tables_command_line, db_settings.fetch('name'),
@@ -179,7 +180,7 @@ namespace :db do
         execute :rm, '-f', remote_dump_file
         execute :rm, '-f', remote_zipped_dump_file
         execute :mysqldump,
-                '--no-data', '--skip-set-charset',
+                '--no-data', '--skip-set-charset', '--no-tablespaces',
                 "--default-character-set=#{db_settings.fetch('charset')}",
                 '-u', db_settings.fetch('username'),
                 '-p',
@@ -214,7 +215,7 @@ namespace :db do
         execute :rm, '-f', remote_file_name
         execute :rm, '-f', remote_zipped_file
         execute :mysqldump,
-                '--no-data', '--skip-set-charset',
+                '--no-data', '--skip-set-charset', '--no-tablespaces',
                 '--no-create-info', '--skip-comments',
                 '--skip-extended-insert', '--skip-set-charset',
                 "--default-character-set=#{db_settings.fetch('charset')}",
@@ -313,7 +314,7 @@ namespace :db do
                 "--default-character-set=#{db_settings.fetch('charset')}",
                 '--no-create-info', '--skip-comments',
                 '--skip-extended-insert', '--skip-set-charset',
-                '--complete-insert',
+                '--complete-insert', '--no-tablespaces',
                 '-u', db_settings.fetch('username'),
                 '-p',
                 '-h', db_settings.fetch('host'), '-P', db_settings.fetch('port'),
