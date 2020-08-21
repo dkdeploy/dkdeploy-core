@@ -7,7 +7,7 @@ module Dkdeploy
     class Version
       MAJOR = 9
       MINOR = 2
-      PATCH = 3
+      PATCH = 4
 
       def self.to_s
         [MAJOR, MINOR, PATCH].join('.')
