@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'dkd basic deployment tasks and strategies'
   spec.summary       = 'dkd basic deployment tasks and strategies'
   spec.homepage      = 'https://github.com/dkdeploy/dkdeploy-core'
-  spec.required_ruby_version = '~> 2.5'
+  spec.required_ruby_version = '~> 2.7'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -22,14 +22,14 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'aruba', '~> 1.0'
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'cucumber', '~> 2.4'
+  spec.add_development_dependency 'cucumber', '~> 5.3'
   spec.add_development_dependency 'dkdeploy-test_environment', '~> 2.0'
-  spec.add_development_dependency 'mysql2', '~> 0.3'
+  spec.add_development_dependency 'mysql2', '~> 0.5'
   spec.add_development_dependency 'pry', '~> 0.10'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec', '~> 3.5'
-  spec.add_development_dependency 'rubocop', '~> 0.86.0'
+  spec.add_development_dependency 'rubocop', '~> 1.12'
 
-  spec.add_dependency 'capistrano', '~> 3.14.1'
+  spec.add_dependency 'capistrano', '~> 3.16'
   spec.add_dependency 'highline', '~> 2.0.3'
 end
