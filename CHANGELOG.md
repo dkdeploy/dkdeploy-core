@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [10.0.0] - 2021-03-30
+### Summary
+
+- relaxed and updated gem dependencies
+
 ## [9.3.1] - 2020-08-20
 ### Summary
 
